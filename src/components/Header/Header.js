@@ -49,15 +49,15 @@ function Logo() {
 }
 
 function Title() {
-  const t = useTranslations();
+  const t = useTranslations('header');
 
   return (
     <div className={styles.titleContainer}>
       <Link href="/" className={styles.title}>
-        {t('header.title')}
+        {t('title')}
       </Link>
-      <sup className={styles.version}>{t('header.version')}</sup>
-      <span className={styles.slogan}> — {t('header.slogan')}</span>
+      <sup className={styles.version}>{t('version')}</sup>
+      <span className={styles.slogan}> — {t('slogan')}</span>
     </div>
   );
 }
