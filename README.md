@@ -38,11 +38,6 @@ Change it as follows:
 WORDPRESS_GRAPHQL_ENDPOINT="http://yourhost.com/index.php?graphql
 ```
 
-### Вимоги
-* [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/)
-* Змінні середовища (див. нижче)
-
 ### Налаштування середовища
 
 Цей проект використовує WPGraphQL для запитів до WordPress за допомогою GraphQL. Щоб зробити запит до відповідної кінцевої точки, нам потрібно встановити змінну середовища, щоб Next.js знав, звідки запитувати інформацію про сайт.
