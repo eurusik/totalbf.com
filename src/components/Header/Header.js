@@ -1,5 +1,4 @@
-import { Search, Swords } from 'lucide-react';
-import { SiDiscord, SiX } from '@icons-pack/react-simple-icons';
+import { Search, MessageSquare, Twitter, Swords } from 'lucide-react';
 import socialLinks from 'config/social-links';
 import Link from 'next/link';
 
@@ -13,7 +12,7 @@ function TwitterIcon() {
       rel="noopener noreferrer"
       className={styles.socialIcon}
     >
-      <SiX className={styles.iconSvg} />
+      <Twitter className={styles.iconSvg} />
     </a>
   );
 }
@@ -34,7 +33,7 @@ function DiscordIcon() {
       rel="noopener noreferrer"
       className={styles.socialIcon}
     >
-      <SiDiscord className={styles.iconSvg} />
+      <MessageSquare className={styles.iconSvg} />
     </a>
   );
 }
