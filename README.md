@@ -38,69 +38,42 @@ Change it as follows:
 WORDPRESS_GRAPHQL_ENDPOINT="http://yourhost.com/index.php?graphql
 ```
 
-## 🚀 Getting Started
-
-### What is this and what does it include?
-
-The goal of this project is to take WordPress as a headless CMS and use Next.js to create a static experience without any 3rd party services that can be deployed anywhere.
-
-The hope is to build out as many features as we can to support what's typically expected from an out of the box theme on WordPress. Currently, those features include:
-* Blog (https://next-wordpress-starter.spacejelly.dev)
-* Pages (https://next-wordpress-starter.spacejelly.dev/about/)
-* Posts (https://next-wordpress-starter.spacejelly.dev/posts/how-to-create-a-headless-wordpress-blog-with-next-js-wordpress-starter/)
-* Categories (https://next-wordpress-starter.spacejelly.dev/categories/tutorial/)
-* Authors (https://next-wordpress-starter.spacejelly.dev/authors/colby-fayock/)
-* Search (Client side global navigation and https://next-wordpress-starter.spacejelly.dev/search/?q=wordpress)
-* RSS (https://next-wordpress-starter.spacejelly.dev/feed.xml)
-* Sitemap (https://next-wordpress-starter.spacejelly.dev/sitemap.xml)
-
-Additionally, the theme is expected to be SEO friendly and performant out of the box, including:
-* Unique page titles
-* Unique descriptions
-* Open Graph tags
-
-You can also optionally enable Yoast SEO plugin support to supercharge your SEO! (See below)
-
-Check out the [Issues](https://github.com/colbyfayock/next-wordpress-starter/issues) for what's on deck!
-
-*Want something a little more **basic**? Check out my other starter with an MVP setup to get up and running with WPGraphQL in WordPress: https://github.com/colbyfayock/next-wpgraphql-basic-starter*
-
-### Requirements
+### Вимоги
 * [WordPress](https://wordpress.org/)
 * [WPGraphQL](https://www.wpgraphql.com/)
-* Environment variables (see below)
+* Змінні середовища (див. нижче)
 
-### Environment
+### Налаштування середовища
 
-This project makes use of WPGraphQL to query WordPress with GraphQL. In order to make that request to the appropriate endpoint, we need to set a environment variable to let Next.js know where to request the site information from.
+Цей проект використовує WPGraphQL для запитів до WordPress за допомогою GraphQL. Щоб зробити запит до відповідної кінцевої точки, нам потрібно встановити змінну середовища, щоб Next.js знав, звідки запитувати інформацію про сайт.
 
-Create a new file locally called `.env.local` and add the following:
+Створіть новий файл локально під назвою `.env.local` та додайте наступне:
 
 ```bash
 WORDPRESS_GRAPHQL_ENDPOINT="[WPGraphQL Endpoint]"
 ```
 
-Replace the contents of the variable with your WPGraphQL endpoint. By default, it should resemble `[Your Host]/graphql`.
+Замініть вміст змінної на вашу кінцеву точку WPGraphQL. За замовчуванням вона має виглядати як `[Ваш хост]/graphql`.
 
-*Note: environment variables can optionally be statically configured in next.config.js*
+*Примітка: змінні середовища також можна статично налаштувати в next.config.js*
 
-#### All Environment Variables
+#### Усі змінні середовища
 
-| Name                               | Required | Default | Description                                       |
-| ---------------------------------- | -------- | -       | ------------------------------------------------- |
-| WORDPRESS_GRAPHQL_ENDPOINT         | Yes      | -       | WordPress WPGraphQL endpoint (ex: host.com/graphl)|
-| WORDPRESS_MENU_LOCATION_NAVIGATION | No       | PRIMARY | Configures header navigation Menu Location        |
-| WORDPRESS_PLUGIN_SEO               | No       | false   | Enables SEO plugin support (true, false)          |
+| Назва                              | Обов'язкова | За замовчуванням | Опис                                              |
+| ---------------------------------- | ----------- | ---------------- | ------------------------------------------------- |
+| WORDPRESS_GRAPHQL_ENDPOINT         | Так         | -                | WordPress WPGraphQL ендпоінт (напр: host.com/graphl)|
+| WORDPRESS_MENU_LOCATION_NAVIGATION | Ні          | PRIMARY          | Налаштовує розташування меню навігації в шапці    |
+| WORDPRESS_PLUGIN_SEO               | Ні          | false            | Вмикає підтримку SEO плагіна (true, false)        |
 
-Please note some themes do not have PRIMARY menu location.
+Зверніть увагу, що деякі теми не мають розташування меню PRIMARY.
 
-### Development
+### Розробка
 
-To start the project locally, run:
+Щоб запустити проект локально, виконайте:
 
 ```bash
 yarn dev
-# or
+# або
 npm run dev
 ```
 
