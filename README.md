@@ -1,6 +1,8 @@
 # TotalBF - Все про серію Battlefield
 
-![TotalBF Logo](public/totalbf.png)
+<div align="center">
+  <img src="public/totalbf.png" alt="TotalBF Logo" width="200" height="auto">
+</div>
 
 TotalBF - це фан-сайт, присвячений серії ігор Battlefield від Electronic Arts та DICE. Наш сайт надає актуальну інформацію, новини, огляди та корисні матеріали для всіх шанувальників серії.
 
