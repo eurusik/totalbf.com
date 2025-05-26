@@ -93,15 +93,6 @@ npm run dev
 
 Конфігурація інтернаціоналізації знаходиться в файлі `next-intl.config.js`.
 
-### WordPress
-
-This project aims to take advantage of as many built-in WordPress features by default like a typical WordPress theme. Those include:
-
-| Name                       | Usage                                   |
-| -------------------------- | --------------------------------------- |
-| Site Language              | `lang` attribute on the `<html>` tag    |
-| Site Title                 | Homepage header, page metadata          |
-
 #### Зображення та CDN
 
 Для статичного обслуговування зображень можна використовувати Jetpack Image Accelerator. Ця функція дозволяє автоматично обслуговувати та кешувати зображення через CDN wp.com. Ця функція доступна безкоштовно з базовою установкою Jetpack.
