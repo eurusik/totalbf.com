@@ -4,10 +4,16 @@
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "installCommand": "npm install"
+        "installCommand": "npm install",
+        "maxLambdaSize": "15mb"
       }
     }
   ],
   "regions": ["fra1"],
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  }
 }
