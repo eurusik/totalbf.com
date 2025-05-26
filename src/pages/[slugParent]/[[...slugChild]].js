@@ -8,7 +8,6 @@ import useSite from 'hooks/use-site';
 import usePageMetadata from 'hooks/use-page-metadata';
 
 import Layout from 'components/Layout';
-import Header from 'components/Header';
 import Content from 'components/Content';
 import Section from 'components/Section';
 import Container from 'components/Container';
@@ -52,17 +51,15 @@ export default function Page({ page, breadcrumbs }) {
         slug={slug}
       />
 
-      <Header>
-        {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-        {featuredImage && (
-          <FeaturedImage
-            {...featuredImage}
-            src={featuredImage.sourceUrl}
-            dangerouslySetInnerHTML={featuredImage.caption}
-          />
-        )}
-        <h1 className={styles.title}>{title}</h1>
-      </Header>
+      {hasBreadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
+      {featuredImage && (
+        <FeaturedImage
+          {...featuredImage}
+          src={featuredImage.sourceUrl}
+          dangerouslySetInnerHTML={featuredImage.caption}
+        />
+      )}
+      <h1 className={styles.title}>{title}</h1>
 
       <Content>
         <Section>

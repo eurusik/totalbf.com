@@ -3,42 +3,113 @@
 @import "styles/components/_container";
 
 .header {
-  margin: 5rem 0;
+  width: 100%;
+  color: #fff;
+}
 
-  h1 {
-    margin: 0;
-    line-height: 1.15;
-    font-size: 3rem;
-    text-align: center;
+.headerInner {
+  padding: 0.75rem 1rem;
+}
 
-    @media (min-width: 480px) {
-      font-size: 4rem;
-    }
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    a {
-      color: $color-primary;
-      text-decoration: none;
-
-      &:hover,
-      &:focus,
-      &:active {
-        text-decoration: underline;
-      }
-    }
-
-    & + ul {
-      margin-top: 1.5em;
-    }
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 75%;
+  
+  @media (min-width: 768px) {
+    gap: 0.75rem;
+    max-width: none;
   }
+}
 
-  p {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+.logoIcon {
+  flex-shrink: 0;
+}
 
-  figure {
-    margin-left: -2rem;
-    margin-right: -2rem;
+.swordsIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  
+  @media (min-width: 768px) {
+    width: 2rem;
+    height: 2rem;
   }
+}
+
+.titleContainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 300;
+  white-space: normal;
+  
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+    white-space: nowrap;
+  }
+}
+
+.version {
+  font-size: 0.75rem;
+  font-weight: 400;
+  
+  @media (min-width: 768px) {
+    font-size: 0.875rem;
+  }
+}
+
+.slogan {
+  display: none;
+  
+  @media (min-width: 768px) {
+    display: inline;
+  }
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.socialIcon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #101010;
+  }
+}
+
+.iconSvg {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.bottomLine {
+  width: 100%;
+  display: block;
+  float: left;
+  border-top: 1px solid #333;
+  margin-top: 0.75rem;
 }

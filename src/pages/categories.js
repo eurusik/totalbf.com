@@ -6,7 +6,6 @@ import { getAllCategories, categoryPathBySlug } from 'lib/categories';
 import { WebpageJsonLd } from 'lib/json-ld';
 
 import Layout from 'components/Layout';
-import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
 import SectionTitle from 'components/SectionTitle';
@@ -31,11 +30,9 @@ export default function Categories({ categories }) {
 
       <WebpageJsonLd title={title} description={metaDescription} siteTitle={siteTitle} slug={slug} />
 
-      <Header>
-        <Container>
-          <h1>Categories</h1>
-        </Container>
-      </Header>
+      <Container>
+        <h1>Categories</h1>
+      </Container>
 
       <Section>
         <Container>

@@ -1,7 +1,9 @@
 import NextApp from 'next/app';
+import { useRouter } from 'next/router';
 
 import { SiteContext, useSiteContext } from 'hooks/use-site';
 import { SearchProvider } from 'hooks/use-search';
+import IntlProvider from 'providers/IntlProvider';
 
 import { getSiteMetadata } from 'lib/site';
 import { getRecentPosts } from 'lib/posts';
@@ -14,6 +16,21 @@ import 'styles/wordpress.scss';
 import variables from 'styles/_variables.module.scss';
 
 function App({ Component, pageProps = {}, metadata, recentPosts, categories, menus }) {
+  const router = useRouter();
+  const locale = router.locale || 'uk';
+  // Load messages for the current locale
+  let messages;
+  try {
+    messages = {
+      header: require(`../messages/${locale}/header.json`),
+    };
+  } catch (error) {
+    console.error(`Could not load messages for locale: ${locale}`, error);
+    messages = {
+      header: require('../messages/uk/header.json'),
+    };
+  }
+
   const site = useSiteContext({
     metadata,
     recentPosts,
@@ -22,12 +39,14 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
   });
 
   return (
-    <SiteContext.Provider value={site}>
-      <SearchProvider>
-        <NextNProgress height={4} color={variables.progressbarColor} />
-        <Component {...pageProps} />
-      </SearchProvider>
-    </SiteContext.Provider>
+    <IntlProvider locale={locale} messages={messages}>
+      <SiteContext.Provider value={site}>
+        <SearchProvider>
+          <NextNProgress height={4} color={variables.progressbarColor} />
+          <Component {...pageProps} />
+        </SearchProvider>
+      </SiteContext.Provider>
+    </IntlProvider>
   );
 }
 

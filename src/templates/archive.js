@@ -5,7 +5,6 @@ import { helmetSettingsFromMetadata } from 'lib/site';
 import useSite from 'hooks/use-site';
 
 import Layout from 'components/Layout';
-import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
 import SectionTitle from 'components/SectionTitle';
@@ -41,19 +40,17 @@ export default function TemplateArchive({
 
       <WebpageJsonLd title={title} description={metadata.description} siteTitle={siteMetadata.title} slug={slug} />
 
-      <Header>
-        <Container>
-          <h1>{Title || title}</h1>
-          {metadata.description && (
-            <p
-              className={styles.archiveDescription}
-              dangerouslySetInnerHTML={{
-                __html: metadata.description,
-              }}
-            />
-          )}
-        </Container>
-      </Header>
+      <Container>
+        <h1>{Title || title}</h1>
+        {metadata.description && (
+          <p
+            className={styles.archiveDescription}
+            dangerouslySetInnerHTML={{
+              __html: metadata.description,
+            }}
+          />
+        )}
+      </Container>
 
       <Section>
         <Container>

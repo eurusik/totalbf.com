@@ -10,7 +10,6 @@ import useSite from 'hooks/use-site';
 import usePageMetadata from 'hooks/use-page-metadata';
 
 import Layout from 'components/Layout';
-import Header from 'components/Header';
 import Section from 'components/Section';
 import Container from 'components/Container';
 import Content from 'components/Content';
@@ -72,29 +71,27 @@ export default function Post({ post, socialImage, related }) {
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
-      <Header>
-        {featuredImage && (
-          <FeaturedImage
-            {...featuredImage}
-            src={featuredImage.sourceUrl}
-            dangerouslySetInnerHTML={featuredImage.caption}
-          />
-        )}
-        <h1
-          className={styles.title}
-          dangerouslySetInnerHTML={{
-            __html: title,
-          }}
+      {featuredImage && (
+        <FeaturedImage
+          {...featuredImage}
+          src={featuredImage.sourceUrl}
+          dangerouslySetInnerHTML={featuredImage.caption}
         />
-        <Metadata
-          className={styles.postMetadata}
-          date={date}
-          author={author}
-          categories={categories}
-          options={metadataOptions}
-          isSticky={isSticky}
-        />
-      </Header>
+      )}
+      <h1
+        className={styles.title}
+        dangerouslySetInnerHTML={{
+          __html: title,
+        }}
+      />
+      <Metadata
+        className={styles.postMetadata}
+        date={date}
+        author={author}
+        categories={categories}
+        options={metadataOptions}
+        isSticky={isSticky}
+      />
 
       <Content>
         <Section>
