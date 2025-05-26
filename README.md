@@ -1,6 +1,6 @@
 # TotalBF - Все про серію Battlefield
 
-![TotalBF Logo](public/apple-touch-icon.png)
+![TotalBF Logo](public/totalbf.png)
 
 TotalBF - це фан-сайт, присвячений серії ігор Battlefield від Electronic Arts та DICE. Наш сайт надає актуальну інформацію, новини, огляди та корисні матеріали для всіх шанувальників серії.
 
