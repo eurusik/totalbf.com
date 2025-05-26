@@ -1,87 +1,97 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import useSite from 'hooks/use-site';
-import { postPathBySlug } from 'lib/posts';
-import { categoryPathBySlug } from 'lib/categories';
-
-import Section from 'components/Section';
 import Container from 'components/Container';
+import footerLinks from 'config/footer-links';
 
 import styles from './Footer.module.scss';
 
-const Footer = () => {
-  const { metadata = {}, recentPosts = [], categories = [] } = useSite();
-  const { title } = metadata;
+// Компонент інформації про авторів
+const AuthorInfo = () => {
+  const t = useTranslations('footer');
+  return (
+    <div className={styles.authorInfo}>
+      <p>{t('authorInfo.inspired')}</p>
+      <p>
+        {t.rich('authorInfo.authors', {
+          eurusik: (chunks) => (
+            <a href="https://github.com/eurusik" target="_blank" rel="noopener noreferrer">
+              {chunks}
+            </a>
+          ),
+          mo45: (chunks) => (
+            <a href="https://github.com/Mo45" target="_blank" rel="noopener noreferrer">
+              {chunks}
+            </a>
+          ),
+        })}
+      </p>
+      <p>
+        {t.rich('authorInfo.legacy', {
+          a: (chunks) => (
+            <a href="https://bf3.com.ua" target="_blank" rel="noopener noreferrer">
+              {chunks}
+            </a>
+          ),
+        })}
+      </p>
+    </div>
+  );
+};
 
-  const hasRecentPosts = Array.isArray(recentPosts) && recentPosts.length > 0;
-  const hasRecentCategories = Array.isArray(categories) && categories.length > 0;
-  const hasMenu = hasRecentPosts || hasRecentCategories;
+// Компонент копірайту
+const Copyright = ({ title }) => {
+  const t = useTranslations('footer');
+  const year = new Date().getFullYear();
+  return (
+    <div className={styles.copyright}>
+      <p>
+        {t.rich('copyright.text', {
+          year,
+          title,
+        })}
+      </p>
+    </div>
+  );
+};
+
+// Компонент навігації
+const Navigation = () => {
+  const t = useTranslations('footer');
+  return (
+    <div className={styles.navigation}>
+      <div className={styles.flex}>
+        {Object.entries(footerLinks).map(([key, link]) => {
+          return link.external ? (
+            <a key={key} href={link.url}>
+              {t(link.translationKey)}
+            </a>
+          ) : (
+            <Link key={key} href={link.url}>
+              {t(link.translationKey)}
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// Головний компонент футера
+const Footer = () => {
+  const { metadata = {} } = useSite();
+  const { title } = metadata;
 
   return (
     <footer className={styles.footer}>
-      {hasMenu && (
-        <Section className={styles.footerMenu}>
-          <Container>
-            <ul className={styles.footerMenuColumns}>
-              {hasRecentPosts && (
-                <li>
-                  <Link className={styles.footerMenuTitle} href="/posts/">
-                    <strong>Recent Posts</strong>
-                  </Link>
-                  <ul className={styles.footerMenuItems}>
-                    {recentPosts.map((post) => {
-                      const { id, slug, title } = post;
-                      return (
-                        <li key={id}>
-                          <Link href={postPathBySlug(slug)}>{title}</Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              )}
-              {hasRecentCategories && (
-                <li>
-                  <Link href="/categories/" className={styles.footerMenuTitle}>
-                    <strong>Categories</strong>
-                  </Link>
-                  <ul className={styles.footerMenuItems}>
-                    {categories.map((category) => {
-                      const { id, slug, name } = category;
-                      return (
-                        <li key={id}>
-                          <Link href={categoryPathBySlug(slug)}>{name}</Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              )}
-              <li>
-                <p className={styles.footerMenuTitle}>
-                  <strong>More</strong>
-                </p>
-                <ul className={styles.footerMenuItems}>
-                  <li>
-                    <a href="/feed.xml">RSS</a>
-                  </li>
-                  <li>
-                    <a href="/sitemap.xml">Sitemap</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </Container>
-        </Section>
-      )}
-
-      <Section className={styles.footerLegal}>
-        <Container>
-          <p>
-            &copy; {new Date().getFullYear()} {title}
-          </p>
-        </Container>
-      </Section>
+      <Container>
+        <div className={`${styles.footerGrid} ${styles.footerFont}`}>
+          <AuthorInfo />
+          <Copyright title={title} />
+          <Navigation />
+        </div>
+      </Container>
     </footer>
   );
 };

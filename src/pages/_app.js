@@ -24,11 +24,13 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
   try {
     messages = {
       header: require(`../messages/${locale}/header.json`),
+      footer: require(`../messages/${locale}/footer.json`),
     };
   } catch (error) {
     console.error(`Could not load messages for locale: ${locale}`, error);
     messages = {
       header: require('../messages/uk/header.json'),
+      footer: require('../messages/uk/footer.json'),
     };
   }
 

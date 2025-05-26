@@ -1,0 +1,17 @@
+{
+  "authorInfo": {
+    "inspired": "Надихалися темою SemiBlack",
+    "authors": "Автори: <eurusik>EuRusik</eurusik> та <mo45>Mo45</mo45>",
+    "legacy": "Нащадок легендарного <a>BF3.com.ua</a>"
+  },
+  "copyright": {
+    "text": "© 2011 - {year} {title}"
+  },
+  "navigation": {
+    "home": "Головна",
+    "news": "Новини",
+    "categories": "Категорії",
+    "rss": "RSS",
+    "sitemap": "Карта сайту"
+  }
+}
