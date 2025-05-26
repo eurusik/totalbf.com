@@ -32,9 +32,4 @@ export default function Custom500() {
   );
 }
 
-// Next.js method to ensure a server-side rendered page gets rendered
-export async function getServerSideProps() {
-  return {
-    props: {},
-  };
-}
+// Custom error pages cannot have getServerSideProps or getStaticProps
