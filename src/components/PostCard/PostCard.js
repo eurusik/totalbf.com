@@ -29,16 +29,6 @@ function PostTitle({ title, comments, slug }) {
   );
 }
 
-/**
- * PostCard component
- * 
- * @param {object} props
- * @param {object} props.post - Post data
- * @param {object} props.options - Options for the component
- * @param {array} props.options.excludeMetadata - Metadata fields to exclude
- * @param {boolean} props.options.unoptimized - Whether to use unoptimized images
- * @param {object} props.options.imageProps - Additional props for the image
- */
 const PostCard = ({ post, options = {} }) => {
   const { title, excerpt, slug, date, author, categories, isSticky = false, comments, featuredImage } = post;
   const { excludeMetadata = [], unoptimized = false, imageProps = {} } = options;
