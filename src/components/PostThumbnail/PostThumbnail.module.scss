@@ -1,0 +1,16 @@
+@import "styles/settings/__settings";
+
+.postThumbnail {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.thumbnailImage {
+  height: 150px;
+  margin-top: 2px;
+  margin-right: 10px;
+  border-radius: 8px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: top;
+}

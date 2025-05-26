@@ -26,12 +26,14 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
     messages = {
       header: require(`../messages/${locale}/header.json`),
       footer: require(`../messages/${locale}/footer.json`),
+      news: require(`../messages/${locale}/news.json`),
     };
   } catch (error) {
     console.error(`Could not load messages for locale: ${locale}`, error);
     messages = {
       header: require(`../messages/${siteConfig.defaultLocale}/header.json`),
       footer: require(`../messages/${siteConfig.defaultLocale}/footer.json`),
+      news: require(`../messages/${siteConfig.defaultLocale}/news.json`),
     };
   }
 

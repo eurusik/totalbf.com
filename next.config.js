@@ -14,6 +14,10 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  images: {
+    domains: ['wp.totalbf.com'],
+  },
+
   // By enabling verbose logging, it will provide additional output details for
   // diagnostic purposes. By default is set to false.
   // verbose: true,

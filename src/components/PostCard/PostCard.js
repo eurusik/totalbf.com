@@ -1,15 +1,47 @@
+'use client';
+
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { MessageSquare } from 'lucide-react';
 
 import { postPathBySlug, sanitizeExcerpt } from 'lib/posts';
-
 import Metadata from 'components/Metadata';
-
+import PostThumbnail from 'components/PostThumbnail';
 import { FaMapPin } from 'react-icons/fa';
+
 import styles from './PostCard.module.scss';
 
+function PostTitle({ title, comments, slug }) {
+  const t = useTranslations('news');
+
+  return (
+    <div className={styles.postTitle}>
+      <Link href={postPathBySlug(slug)} title={title} className={styles.postTitleLink}>
+        <span dangerouslySetInnerHTML={{ __html: title }} />
+      </Link>
+      {comments !== undefined && (
+        <span className={styles.commentsCount} title={t('comments')}>
+          <MessageSquare className={styles.commentsIcon} />
+          {comments}
+        </span>
+      )}
+    </div>
+  );
+}
+
+/**
+ * PostCard component
+ * 
+ * @param {object} props
+ * @param {object} props.post - Post data
+ * @param {object} props.options - Options for the component
+ * @param {array} props.options.excludeMetadata - Metadata fields to exclude
+ * @param {boolean} props.options.unoptimized - Whether to use unoptimized images
+ * @param {object} props.options.imageProps - Additional props for the image
+ */
 const PostCard = ({ post, options = {} }) => {
-  const { title, excerpt, slug, date, author, categories, isSticky = false } = post;
-  const { excludeMetadata = [] } = options;
+  const { title, excerpt, slug, date, author, categories, isSticky = false, comments, featuredImage } = post;
+  const { excludeMetadata = [], unoptimized = false, imageProps = {} } = options;
 
   const metadata = {};
 
@@ -33,24 +65,20 @@ const PostCard = ({ post, options = {} }) => {
 
   return (
     <div className={postCardStyle}>
-      {isSticky && <FaMapPin aria-label="Sticky Post" />}
-      <Link href={postPathBySlug(slug)}>
-        <h3
-          className={styles.postCardTitle}
-          dangerouslySetInnerHTML={{
-            __html: title,
-          }}
-        />
-      </Link>
+      {isSticky && <FaMapPin aria-label="Sticky Post" className={styles.stickyIcon} />}
+      <PostTitle title={title} comments={comments} slug={slug} />
+      <div className={styles.postContent}>
+        <PostThumbnail thumbnail={featuredImage} title={title} unoptimized={unoptimized} imageProps={imageProps} />
+        {excerpt && (
+          <div
+            className={styles.postExcerpt}
+            dangerouslySetInnerHTML={{
+              __html: sanitizeExcerpt(excerpt),
+            }}
+          />
+        )}
+      </div>
       <Metadata className={styles.postCardMetadata} {...metadata} />
-      {excerpt && (
-        <div
-          className={styles.postCardContent}
-          dangerouslySetInnerHTML={{
-            __html: sanitizeExcerpt(excerpt),
-          }}
-        />
-      )}
     </div>
   );
 };

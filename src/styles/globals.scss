@@ -47,6 +47,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
+h1:first-child {
+  margin-top: 0;
+}
+
 p {
   font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
