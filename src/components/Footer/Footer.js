@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 import useSite from 'hooks/use-site';
 import Container from 'components/Container';
@@ -9,44 +8,36 @@ import styles from './Footer.module.scss';
 
 // Компонент інформації про авторів
 const AuthorInfo = () => {
-  const t = useTranslations('footer');
   return (
     <div className={styles.authorInfo}>
-      <p>{t('authorInfo.inspired')}</p>
+      <p>Надихалися темою SemiBlack</p>
       <p>
-        {t.rich('authorInfo.authors', {
-          eurusik: (chunks) => (
-            <a
-              href="https://github.com/eurusik"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {chunks}
-            </a>
-          ),
-          mo45: (chunks) => (
-            <a
-              href="https://github.com/Mo45"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {chunks}
-            </a>
-          ),
-        })}
+        Автори:{' '}
+        <a
+          href="https://github.com/eurusik"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          EuRusik
+        </a>{' '}
+        та{' '}
+        <a
+          href="https://github.com/Mo45"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mo45
+        </a>
       </p>
       <p>
-        {t.rich('authorInfo.legacy', {
-          a: (chunks) => (
-            <a
-              href="https://bf3.com.ua"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {chunks}
-            </a>
-          ),
-        })}
+        Нащадок легендарного{' '}
+        <a
+          href="https://web.archive.org/web/20160304044039/http://bf3.com.ua/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BF3.com.ua
+        </a>
       </p>
     </div>
   );
@@ -54,15 +45,11 @@ const AuthorInfo = () => {
 
 // Компонент копірайту
 const Copyright = ({ title }) => {
-  const t = useTranslations('footer');
   const year = new Date().getFullYear();
   return (
     <div className={styles.copyright}>
       <p>
-        {t.rich('copyright.text', {
-          year,
-          title,
-        })}
+        © 2011 - {year} {title} | зроблено з ❤️,
       </p>
     </div>
   );
@@ -70,18 +57,25 @@ const Copyright = ({ title }) => {
 
 // Компонент навігації
 const Navigation = () => {
-  const t = useTranslations('footer');
+  const navigationLabels = {
+    'navigation.home': 'Головна',
+    'navigation.news': 'Новини',
+    'navigation.categories': 'Категорії',
+    'navigation.rss': 'RSS',
+    'navigation.sitemap': 'Карта сайту',
+  };
+
   return (
     <div className={styles.navigation}>
       <div className={styles.flex}>
         {Object.entries(footerLinks).map(([key, link]) => {
           return link.external ? (
             <a key={key} href={link.url}>
-              {t(link.translationKey)}
+              {navigationLabels[link.translationKey] || link.translationKey}
             </a>
           ) : (
             <Link key={key} href={link.url}>
-              {t(link.translationKey)}
+              {navigationLabels[link.translationKey] || link.translationKey}
             </Link>
           );
         })}

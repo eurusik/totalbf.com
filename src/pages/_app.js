@@ -1,9 +1,6 @@
 import NextApp from 'next/app';
-import { useRouter } from 'next/router';
-
 import { SiteContext, useSiteContext } from 'hooks/use-site';
 import { SearchProvider } from 'hooks/use-search';
-import IntlProvider from 'providers/IntlProvider';
 import siteConfig from 'config/site-config';
 
 import { getSiteMetadata } from 'lib/site';
@@ -25,27 +22,6 @@ function App({
   categories,
   menus,
 }) {
-  const router = useRouter();
-  const locale = router.locale || siteConfig.defaultLocale;
-  // Load messages for the current locale
-  let messages;
-  try {
-    messages = {
-      header: require(`../messages/${locale}/header.json`),
-      footer: require(`../messages/${locale}/footer.json`),
-      news: require(`../messages/${locale}/news.json`),
-      dateTime: require(`../messages/${locale}/dateTime.json`),
-    };
-  } catch (error) {
-    console.error(`Could not load messages for locale: ${locale}`, error);
-    messages = {
-      header: require(`../messages/${siteConfig.defaultLocale}/header.json`),
-      footer: require(`../messages/${siteConfig.defaultLocale}/footer.json`),
-      news: require(`../messages/${siteConfig.defaultLocale}/news.json`),
-      dateTime: require(`../messages/${siteConfig.defaultLocale}/dateTime.json`),
-    };
-  }
-
   const site = useSiteContext({
     metadata,
     recentPosts,
@@ -55,16 +31,14 @@ function App({
   });
 
   return (
-    <IntlProvider locale={locale} messages={messages}>
-      <SiteContext.Provider value={site}>
-        <SearchProvider>
-          <div className={`${inter.variable} ${roboto.variable}`}>
-            <NextNProgress height={4} color={variables.progressbarColor} />
-            <Component {...pageProps} />
-          </div>
-        </SearchProvider>
-      </SiteContext.Provider>
-    </IntlProvider>
+    <SiteContext.Provider value={site}>
+      <SearchProvider>
+        <div className={`${inter.variable} ${roboto.variable}`}>
+          <NextNProgress height={4} color={variables.progressbarColor} />
+          <Component {...pageProps} />
+        </div>
+      </SearchProvider>
+    </SiteContext.Provider>
   );
 }
 

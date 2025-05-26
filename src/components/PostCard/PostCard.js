@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { MessageSquare } from 'lucide-react';
 
 import { postPathBySlug, sanitizeExcerpt } from 'lib/posts';
@@ -12,8 +11,6 @@ import { FaMapPin } from 'react-icons/fa';
 import styles from './PostCard.module.scss';
 
 function PostTitle({ title, comments, slug }) {
-  const t = useTranslations('news');
-
   return (
     <div className={styles.postTitle}>
       <Link
@@ -24,7 +21,7 @@ function PostTitle({ title, comments, slug }) {
         <span dangerouslySetInnerHTML={{ __html: title }} />
       </Link>
       {comments !== undefined && (
-        <span className={styles.commentsCount} title={t('comments')}>
+        <span className={styles.commentsCount} title="Коментарі">
           <MessageSquare className={styles.commentsIcon} />
           {comments}
         </span>

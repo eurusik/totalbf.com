@@ -1,5 +1,4 @@
 import { Search, Swords } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { SiDiscord, SiX } from '@icons-pack/react-simple-icons';
 import socialLinks from 'config/social-links';
 import Link from 'next/link';
@@ -59,15 +58,13 @@ function Logo() {
 }
 
 function Title() {
-  const t = useTranslations('header');
-
   return (
     <div className={styles.titleContainer}>
       <Link href="/" className={styles.title}>
-        {t('title')}
+        TotalBF
       </Link>
-      <sup className={styles.version}>{t('version')}</sup>
-      <span className={styles.slogan}> — {t('slogan')}</span>
+      <sup className={styles.version}>1.0</sup>
+      <span className={styles.slogan}> — Твоє поле битви</span>
     </div>
   );
 }
