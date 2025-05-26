@@ -10,6 +10,7 @@ import { getRecentPosts } from 'lib/posts';
 import { getCategories } from 'lib/categories';
 import NextNProgress from 'nextjs-progressbar';
 import { getAllMenus } from 'lib/menus';
+import { inter, roboto } from 'lib/fonts';
 
 import 'styles/globals.scss';
 import 'styles/wordpress.scss';
@@ -42,8 +43,10 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
     <IntlProvider locale={locale} messages={messages}>
       <SiteContext.Provider value={site}>
         <SearchProvider>
-          <NextNProgress height={4} color={variables.progressbarColor} />
-          <Component {...pageProps} />
+          <div className={`${inter.variable} ${roboto.variable}`}>
+            <NextNProgress height={4} color={variables.progressbarColor} />
+            <Component {...pageProps} />
+          </div>
         </SearchProvider>
       </SiteContext.Provider>
     </IntlProvider>
