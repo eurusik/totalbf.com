@@ -59,7 +59,7 @@ export default function Categories({ categories }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { categories } = await getAllCategories();
 
   return {

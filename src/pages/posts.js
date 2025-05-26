@@ -26,7 +26,7 @@ export default function Posts({ posts, pagination }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { posts, pagination } = await getPaginatedPosts({
     queryIncludes: 'archive',
   });

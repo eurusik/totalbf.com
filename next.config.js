@@ -14,6 +14,10 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  // Disable SSG and use SSR instead
+  output: 'standalone',
+  runtime: 'nodejs',
+
   images: {
     domains: ['wp.totalbf.com'],
   },
@@ -34,8 +38,12 @@ const nextConfig = {
     POSTS_PRERENDER_COUNT: 5,
 
     WORDPRESS_GRAPHQL_ENDPOINT: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
-    WORDPRESS_MENU_LOCATION_NAVIGATION: process.env.WORDPRESS_MENU_LOCATION_NAVIGATION || 'PRIMARY',
-    WORDPRESS_PLUGIN_SEO: parseEnvValue(process.env.WORDPRESS_PLUGIN_SEO, false),
+    WORDPRESS_MENU_LOCATION_NAVIGATION:
+      process.env.WORDPRESS_MENU_LOCATION_NAVIGATION || 'PRIMARY',
+    WORDPRESS_PLUGIN_SEO: parseEnvValue(
+      process.env.WORDPRESS_PLUGIN_SEO,
+      false
+    ),
   },
 };
 

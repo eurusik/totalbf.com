@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 
-import { getPostBySlug, getRecentPosts, getRelatedPosts } from 'lib/posts';
+import { getPostBySlug, getRelatedPosts } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
 import { ArticleJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
@@ -133,7 +133,7 @@ export default function Post({ post, socialImage }) {
   );
 }
 
-export async function getStaticProps({ params = {} } = {}) {
+export async function getServerSideProps({ params = {} } = {}) {
   const { post } = await getPostBySlug(params?.slug);
 
   if (!post) {
@@ -167,31 +167,5 @@ export async function getStaticProps({ params = {} } = {}) {
 
   return {
     props,
-  };
-}
-
-export async function getStaticPaths() {
-  // Only render the most recent posts to avoid spending unecessary time
-  // querying every single post from WordPress
-
-  // Tip: this can be customized to use data or analytitcs to determine the
-  // most popular posts and render those instead
-
-  const { posts } = await getRecentPosts({
-    count: process.env.POSTS_PRERENDER_COUNT, // Update this value in next.config.js!
-    queryIncludes: 'index',
-  });
-
-  const paths = posts
-    .filter(({ slug }) => typeof slug === 'string')
-    .map(({ slug }) => ({
-      params: {
-        slug,
-      },
-    }));
-
-  return {
-    paths,
-    fallback: 'blocking',
   };
 }

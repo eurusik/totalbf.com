@@ -29,7 +29,7 @@ export default function Category({ category, posts }) {
   );
 }
 
-export async function getStaticProps({ params = {} } = {}) {
+export async function getServerSideProps({ params = {} } = {}) {
   const { category } = await getCategoryBySlug(params?.slug);
 
   if (!category) {
@@ -49,36 +49,5 @@ export async function getStaticProps({ params = {} } = {}) {
       category,
       posts,
     },
-  };
-}
-
-export async function getStaticPaths() {
-  // By default, we don't render any Category pages as
-  // we're considering them non-critical pages
-
-  // To enable pre-rendering of Category pages:
-
-  // 1. Add import to the top of the file
-  //
-  // import { getAllCategories, getCategoryBySlug } from 'lib/categories';
-
-  // 2. Uncomment the below
-  //
-  // const { categories } = await getAllCategories();
-
-  // const paths = categories.map((category) => {
-  //   const { slug } = category;
-  //   return {
-  //     params: {
-  //       slug,
-  //     },
-  //   };
-  // });
-
-  // 3. Update `paths` in the return statement below to reference the `paths` constant above
-
-  return {
-    paths: [],
-    fallback: 'blocking',
   };
 }

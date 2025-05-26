@@ -107,7 +107,7 @@ export default function Page({ page, breadcrumbs }) {
   );
 }
 
-export async function getStaticProps({ params = {} } = {}) {
+export async function getServerSideProps({ params = {} } = {}) {
   const { slugParent, slugChild } = params;
 
   // We can use the URI to look up our page and subsequently its ID, so
@@ -147,36 +147,5 @@ export async function getStaticProps({ params = {} } = {}) {
       page,
       breadcrumbs,
     },
-  };
-}
-
-export async function getStaticPaths() {
-  const { pages } = await getAllPages({
-    queryIncludes: 'index',
-  });
-
-  // Take all the pages and create path params. The slugParent will always be
-  // the top level parent page, where the slugChild will be an array of the
-  // remaining segments to make up the path or URI
-
-  // We also filter out the `/` homepage as it will conflict with index.js if
-  // as they have the same path, which will fail the build
-
-  const paths = pages
-    .filter(({ uri }) => typeof uri === 'string' && uri !== '/')
-    .map(({ uri }) => {
-      const segments = uri.split('/').filter((seg) => seg !== '');
-
-      return {
-        params: {
-          slugParent: segments.shift(),
-          slugChild: segments,
-        },
-      };
-    });
-
-  return {
-    paths,
-    fallback: 'blocking',
   };
 }

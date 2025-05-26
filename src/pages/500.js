@@ -32,8 +32,8 @@ export default function Custom500() {
   );
 }
 
-// Next.js method to ensure a static page gets rendered
-export async function getStaticProps() {
+// Next.js method to ensure a server-side rendered page gets rendered
+export async function getServerSideProps() {
   return {
     props: {},
   };
