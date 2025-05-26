@@ -5,12 +5,11 @@
 /**
  * Format a date string to a localized format (DD.MM.YYYY)
  * @param {string} dateString - The date string to format
- * @param {string} locale - The locale to use for formatting (defaults to 'uk-UA')
  * @returns {string} Formatted date string
  */
-export function formatDate(dateString, locale = 'uk-UA') {
+export function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString(locale, {
+  return date.toLocaleDateString('uk-UA', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -20,12 +19,11 @@ export function formatDate(dateString, locale = 'uk-UA') {
 /**
  * Format a date string to a full format with time
  * @param {string} dateString - The date string to format
- * @param {string} locale - The locale to use for formatting (defaults to 'uk-UA')
  * @returns {string} Formatted date and time string
  */
-export function formatDateTime(dateString, locale = 'uk-UA') {
+export function formatDateTime(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleString(locale, {
+  return date.toLocaleString('uk-UA', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -38,10 +36,9 @@ export function formatDateTime(dateString, locale = 'uk-UA') {
  * Format a date to a relative time (e.g., "2 days ago")
  * @param {string} dateString - The date string to format
  * @param {Object} translations - Object with translation functions
- * @param {string} locale - The locale to use for formatting (defaults to 'uk-UA')
  * @returns {string} Relative time string
  */
-export function formatRelativeTime(dateString, translations, locale = 'uk-UA') {
+export function formatRelativeTime(dateString, translations) {
   const date = new Date(dateString);
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - date.getTime());
@@ -65,7 +62,7 @@ export function formatRelativeTime(dateString, translations, locale = 'uk-UA') {
 
   // Format based on the most significant time unit
   if (days >= 30) {
-    return formatDate(dateString, locale);
+    return formatDate(dateString);
   }
 
   if (days > 0) {
