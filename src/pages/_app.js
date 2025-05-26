@@ -27,6 +27,7 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
       header: require(`../messages/${locale}/header.json`),
       footer: require(`../messages/${locale}/footer.json`),
       news: require(`../messages/${locale}/news.json`),
+      dateTime: require(`../messages/${locale}/dateTime.json`),
     };
   } catch (error) {
     console.error(`Could not load messages for locale: ${locale}`, error);
@@ -34,6 +35,7 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
       header: require(`../messages/${siteConfig.defaultLocale}/header.json`),
       footer: require(`../messages/${siteConfig.defaultLocale}/footer.json`),
       news: require(`../messages/${siteConfig.defaultLocale}/news.json`),
+      dateTime: require(`../messages/${siteConfig.defaultLocale}/dateTime.json`),
     };
   }
 

@@ -1,9 +1,7 @@
-import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
-import { getPostBySlug, getRecentPosts, getRelatedPosts, postPathBySlug } from 'lib/posts';
+import { getPostBySlug, getRecentPosts, getRelatedPosts } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
-import { formatDate } from 'lib/datetime';
 import { ArticleJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
 import useSite from 'hooks/use-site';
@@ -18,19 +16,8 @@ import PostThumbnail from 'components/PostThumbnail/PostThumbnail';
 
 import styles from 'styles/pages/Post.module.scss';
 
-export default function Post({ post, socialImage, related }) {
-  const {
-    title,
-    metaTitle,
-    description,
-    content,
-    date,
-    author,
-    categories,
-    modified,
-    featuredImage,
-    isSticky = false,
-  } = post;
+export default function Post({ post, socialImage }) {
+  const { title, metaTitle, description, content, date, author, categories, featuredImage, isSticky = false } = post;
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
 
@@ -61,8 +48,6 @@ export default function Post({ post, socialImage, related }) {
     compactCategories: false,
   };
 
-  const { posts: relatedPostsList, title: relatedPostsTitle } = related || {};
-
   const helmetSettings = helmetSettingsFromMetadata(metadata);
 
   return (
@@ -70,24 +55,27 @@ export default function Post({ post, socialImage, related }) {
       <Helmet {...helmetSettings} />
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
-      <h1
-        className={styles.title}
-        dangerouslySetInnerHTML={{
-          __html: title,
-        }}
-      />
-      <Metadata
-        className={styles.postMetadata}
-        date={date}
-        author={author}
-        categories={categories}
-        options={metadataOptions}
-        isSticky={isSticky}
-      />
 
-      {featuredImage && (
-        <PostThumbnail thumbnail={featuredImage} title={title} unoptimized={true} imageProps={{ quality: 100 }} />
-      )}
+      <div style={{ margin: '0 1rem' }}>
+        <h1
+          className={styles.title}
+          dangerouslySetInnerHTML={{
+            __html: title,
+          }}
+        />
+        <Metadata
+          className={styles.postMetadata}
+          date={date}
+          author={author}
+          categories={categories}
+          options={metadataOptions}
+          isSticky={isSticky}
+        />
+
+        {featuredImage && (
+          <PostThumbnail thumbnail={featuredImage} title={title} unoptimized={true} imageProps={{ quality: 100 }} />
+        )}
+      </div>
 
       <Content>
         <Section>
@@ -102,7 +90,7 @@ export default function Post({ post, socialImage, related }) {
         </Section>
       </Content>
 
-      <Section className={styles.postFooter}>
+      {/* <Section className={styles.postFooter}>
         <Container>
           <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
           {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
@@ -124,7 +112,7 @@ export default function Post({ post, socialImage, related }) {
             </div>
           )}
         </Container>
-      </Section>
+      </Section> */}
     </Layout>
   );
 }

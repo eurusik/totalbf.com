@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { categoryPathBySlug } from 'lib/categories';
 import { authorPathByName } from 'lib/users';
-import { formatDate } from 'lib/datetime';
 import ClassName from 'models/classname';
+import PublicationDate from 'components/PublicationDate';
 
 import { FaMapPin } from 'react-icons/fa';
 import styles from './Metadata.module.scss';
@@ -32,7 +32,6 @@ const Metadata = ({ className, author, date, categories, options = DEFAULT_METAD
                 alt="Author Avatar"
               />
             )}
-            By{' '}
             <Link href={authorPathByName(author.name)} rel="author">
               {author.name}
             </Link>
@@ -41,9 +40,7 @@ const Metadata = ({ className, author, date, categories, options = DEFAULT_METAD
       )}
       {date && (
         <li>
-          <time pubdate="pubdate" dateTime={date}>
-            {formatDate(date)}
-          </time>
+          <PublicationDate date={date} />
         </li>
       )}
       {Array.isArray(categories) && categories[0] && (

@@ -1,0 +1,18 @@
+{
+  "publicationDate": "Дата публікації:",
+  "justNow": "щойно",
+  "yesterday": "вчора",
+  "ago": "тому",
+  "day": "день",
+  "days": "дні",
+  "manyDays": "днів",
+  "hour": "година",
+  "hours": "години",
+  "manyHours": "годин",
+  "minute": "хвилина",
+  "minutes": "хвилини",
+  "manyMinutes": "хвилин",
+  "second": "секунда",
+  "seconds": "секунди",
+  "manySeconds": "секунд"
+}
