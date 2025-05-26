@@ -40,34 +40,41 @@ function SocialIcons() {
   );
 }
 
-const Header = () => {
+function Logo() {
+  return (
+    <div className={styles.logoIcon}>
+      <Swords className={styles.swordsIcon} />
+    </div>
+  );
+}
+
+function Title() {
   const t = useTranslations();
 
+  return (
+    <div className={styles.titleContainer}>
+      <Link href="/" className={styles.title}>
+        {t('header.title')}
+      </Link>
+      <sup className={styles.version}>{t('header.version')}</sup>
+      <span className={styles.slogan}> — {t('header.slogan')}</span>
+    </div>
+  );
+}
+
+const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.headerContent}>
-          {/* Logo and Title */}
           <div className={styles.logoContainer}>
-            <div className={styles.logoIcon}>
-              <Swords className={styles.swordsIcon} />
-            </div>
-
-            {/* Title */}
-            <div className={styles.titleContainer}>
-              <Link href="/" className={styles.title}>
-                {t('header.title')}
-              </Link>
-              <sup className={styles.version}>{t('header.version')}</sup>
-              <span className={styles.slogan}> — {t('header.slogan')}</span>
-            </div>
+            <Logo />
+            <Title />
           </div>
 
-          {/* Right - Social Icons */}
           <SocialIcons />
         </div>
 
-        {/* Bottom Line */}
         <div className={styles.bottomLine}></div>
       </div>
     </header>

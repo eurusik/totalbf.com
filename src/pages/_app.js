@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { SiteContext, useSiteContext } from 'hooks/use-site';
 import { SearchProvider } from 'hooks/use-search';
 import IntlProvider from 'providers/IntlProvider';
+import siteConfig from 'config/site-config';
 
 import { getSiteMetadata } from 'lib/site';
 import { getRecentPosts } from 'lib/posts';
@@ -18,7 +19,7 @@ import variables from 'styles/_variables.module.scss';
 
 function App({ Component, pageProps = {}, metadata, recentPosts, categories, menus }) {
   const router = useRouter();
-  const locale = router.locale || 'uk';
+  const locale = router.locale || siteConfig.defaultLocale;
   // Load messages for the current locale
   let messages;
   try {
@@ -29,8 +30,8 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
   } catch (error) {
     console.error(`Could not load messages for locale: ${locale}`, error);
     messages = {
-      header: require('../messages/uk/header.json'),
-      footer: require('../messages/uk/footer.json'),
+      header: require(`../messages/${siteConfig.defaultLocale}/header.json`),
+      footer: require(`../messages/${siteConfig.defaultLocale}/footer.json`),
     };
   }
 
@@ -39,6 +40,7 @@ function App({ Component, pageProps = {}, metadata, recentPosts, categories, men
     recentPosts,
     categories,
     menus,
+    homepage: siteConfig.siteUrl,
   });
 
   return (
