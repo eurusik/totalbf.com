@@ -6,7 +6,6 @@ import footerLinks from 'config/footer-links';
 
 import styles from './Footer.module.scss';
 
-// Компонент інформації про авторів
 const AuthorInfo = () => {
   return (
     <div className={styles.authorInfo}>
@@ -31,11 +30,7 @@ const AuthorInfo = () => {
       </p>
       <p>
         Нащадок легендарного{' '}
-        <a
-          href="https://web.archive.org/web/20160304044039/http://bf3.com.ua/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="http://bf3.com.ua/" target="_blank" rel="noopener noreferrer">
           BF3.com.ua
         </a>
       </p>
@@ -49,7 +44,7 @@ const Copyright = ({ title }) => {
   return (
     <div className={styles.copyright}>
       <p>
-        © 2011 - {year} {title} | зроблено з ❤️,
+        © 2011 - {year} {title} | зроблено з ❤️
       </p>
     </div>
   );
