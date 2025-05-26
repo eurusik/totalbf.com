@@ -1,5 +1,5 @@
-@import "styles/settings/__settings";
-@import "style.css";
+@import 'styles/settings/__settings';
+@import 'style.css';
 
 /* Шрифти */
 @font-face {
@@ -24,13 +24,15 @@
 
 html,
 body {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
   font-size: 1rem;
   font-style: normal;
   color: #000000;
   font-weight: normal;
   background: var(--background);
-  background-image: url("/images/bg_battlefield.webp");
+  background-image: url('/images/bg_battlefield.webp');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center top;
@@ -39,8 +41,15 @@ body {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Segoe UI', 'Segoe UI Lights', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Segoe UI', 'Segoe UI Lights', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
   font-weight: 300;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
@@ -76,7 +85,9 @@ h1:first-child {
 }
 
 p {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
   line-height: 1.6;
   margin: 1.2em 0;
 }
@@ -86,20 +97,28 @@ ul {
 }
 
 a {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
   color: $color-primary;
 }
 
 span {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
 }
 
 time {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
 }
 
 address {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto), var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
   font-style: normal;
 }
 
@@ -109,9 +128,9 @@ img {
 }
 
 input {
-  &[type="text"],
-  &[type="search"],
-  &[type="email"] {
+  &[type='text'],
+  &[type='search'],
+  &[type='email'] {
     outline-offset: 0;
     padding: 0.5em 0.8em;
   }

@@ -17,7 +17,14 @@ import 'styles/globals.scss';
 import 'styles/wordpress.scss';
 import variables from 'styles/_variables.module.scss';
 
-function App({ Component, pageProps = {}, metadata, recentPosts, categories, menus }) {
+function App({
+  Component,
+  pageProps = {},
+  metadata,
+  recentPosts,
+  categories,
+  menus,
+}) {
   const router = useRouter();
   const locale = router.locale || siteConfig.defaultLocale;
   // Load messages for the current locale

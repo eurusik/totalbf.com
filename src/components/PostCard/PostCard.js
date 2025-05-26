@@ -16,7 +16,11 @@ function PostTitle({ title, comments, slug }) {
 
   return (
     <div className={styles.postTitle}>
-      <Link href={postPathBySlug(slug)} title={title} className={styles.postTitleLink}>
+      <Link
+        href={postPathBySlug(slug)}
+        title={title}
+        className={styles.postTitleLink}
+      >
         <span dangerouslySetInnerHTML={{ __html: title }} />
       </Link>
       {comments !== undefined && (
@@ -30,8 +34,22 @@ function PostTitle({ title, comments, slug }) {
 }
 
 const PostCard = ({ post, options = {} }) => {
-  const { title, excerpt, slug, date, author, categories, isSticky = false, comments, featuredImage } = post;
-  const { excludeMetadata = [], unoptimized = false, imageProps = {} } = options;
+  const {
+    title,
+    excerpt,
+    slug,
+    date,
+    author,
+    categories,
+    isSticky = false,
+    comments,
+    featuredImage,
+  } = post;
+  const {
+    excludeMetadata = [],
+    unoptimized = false,
+    imageProps = {},
+  } = options;
 
   const metadata = {};
 
@@ -55,10 +73,17 @@ const PostCard = ({ post, options = {} }) => {
 
   return (
     <div className={postCardStyle}>
-      {isSticky && <FaMapPin aria-label="Sticky Post" className={styles.stickyIcon} />}
+      {isSticky && (
+        <FaMapPin aria-label="Sticky Post" className={styles.stickyIcon} />
+      )}
       <PostTitle title={title} comments={comments} slug={slug} />
       <div className={styles.postContent}>
-        <PostThumbnail thumbnail={featuredImage} title={title} unoptimized={unoptimized} imageProps={imageProps} />
+        <PostThumbnail
+          thumbnail={featuredImage}
+          title={title}
+          unoptimized={unoptimized}
+          imageProps={imageProps}
+        />
         {excerpt && (
           <div
             className={styles.postExcerpt}

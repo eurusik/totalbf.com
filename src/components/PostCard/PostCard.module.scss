@@ -1,4 +1,4 @@
-@import "styles/settings/__settings";
+@import 'styles/settings/__settings';
 
 .postCard {
   position: relative;
@@ -39,11 +39,11 @@
   text-decoration: none;
   margin-right: 0.25rem;
   transition: color 0.2s;
-  
+
   @media (min-width: 768px) {
     font-size: 1.875rem;
   }
-  
+
   &:hover {
     color: $color-yellow-500;
   }
@@ -55,7 +55,7 @@
   font-size: 1.125rem;
   color: #a0aec0;
   font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
-  
+
   @media (min-width: 768px) {
     font-size: 1.25rem;
   }
@@ -88,7 +88,7 @@
   color: white;
   font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
   font-size: 1rem;
-  
+
   p {
     &:first-child {
       margin-top: 0;

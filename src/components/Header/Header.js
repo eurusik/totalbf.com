@@ -8,7 +8,12 @@ import styles from './Header.module.scss';
 
 function TwitterIcon() {
   return (
-    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+    <a
+      href={socialLinks.twitter}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.socialIcon}
+    >
       <SiX className={styles.iconSvg} />
     </a>
   );
@@ -24,7 +29,12 @@ function SearchIcon() {
 
 function DiscordIcon() {
   return (
-    <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+    <a
+      href={socialLinks.discord}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.socialIcon}
+    >
       <SiDiscord className={styles.iconSvg} />
     </a>
   );

@@ -48,7 +48,9 @@ export function formatRelativeTime(dateString, translations, locale = 'uk-UA') {
 
   // Calculate time differences
   const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const hours = Math.floor(
+    (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
   const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
@@ -93,21 +95,41 @@ function formatTimeWithUnit(value, unit, translations) {
 
   switch (unit) {
     case 'day':
-      form = getWordForm(value, translations.day, translations.days, translations.manyDays);
+      form = getWordForm(
+        value,
+        translations.day,
+        translations.days,
+        translations.manyDays
+      );
       break;
     case 'hour':
-      form = getWordForm(value, translations.hour, translations.hours, translations.manyHours);
+      form = getWordForm(
+        value,
+        translations.hour,
+        translations.hours,
+        translations.manyHours
+      );
       break;
     case 'minute':
-      form = getWordForm(value, translations.minute, translations.minutes, translations.manyMinutes);
+      form = getWordForm(
+        value,
+        translations.minute,
+        translations.minutes,
+        translations.manyMinutes
+      );
       break;
     case 'second':
-      form = getWordForm(value, translations.second, translations.seconds, translations.manySeconds);
+      form = getWordForm(
+        value,
+        translations.second,
+        translations.seconds,
+        translations.manySeconds
+      );
       break;
     default:
       form = '';
   }
-  
+
   return `${value} ${form} ${translations.ago}`;
 }
 
@@ -125,7 +147,10 @@ function getWordForm(number, form1, form2, form5) {
 
   if (lastDigit === 1 && lastTwoDigits !== 11) {
     return form1;
-  } else if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(lastTwoDigits)) {
+  } else if (
+    [2, 3, 4].includes(lastDigit) &&
+    ![12, 13, 14].includes(lastTwoDigits)
+  ) {
     return form2;
   } else {
     return form5;

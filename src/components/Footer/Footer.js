@@ -16,12 +16,20 @@ const AuthorInfo = () => {
       <p>
         {t.rich('authorInfo.authors', {
           eurusik: (chunks) => (
-            <a href="https://github.com/eurusik" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/eurusik"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {chunks}
             </a>
           ),
           mo45: (chunks) => (
-            <a href="https://github.com/Mo45" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/Mo45"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {chunks}
             </a>
           ),
@@ -30,7 +38,11 @@ const AuthorInfo = () => {
       <p>
         {t.rich('authorInfo.legacy', {
           a: (chunks) => (
-            <a href="https://bf3.com.ua" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://bf3.com.ua"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {chunks}
             </a>
           ),

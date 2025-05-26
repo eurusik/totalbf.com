@@ -17,7 +17,17 @@ import PostThumbnail from 'components/PostThumbnail/PostThumbnail';
 import styles from 'styles/pages/Post.module.scss';
 
 export default function Post({ post, socialImage }) {
-  const { title, metaTitle, description, content, date, author, categories, featuredImage, isSticky = false } = post;
+  const {
+    title,
+    metaTitle,
+    description,
+    content,
+    date,
+    author,
+    categories,
+    featuredImage,
+    isSticky = false,
+  } = post;
 
   const { metadata: siteMetadata = {}, homepage } = useSite();
 
@@ -34,7 +44,8 @@ export default function Post({ post, socialImage }) {
     metadata: {
       ...post,
       title: metaTitle,
-      description: description || post.og?.description || `Read more about ${title}`,
+      description:
+        description || post.og?.description || `Read more about ${title}`,
     },
   });
 
@@ -73,7 +84,12 @@ export default function Post({ post, socialImage }) {
         />
 
         {featuredImage && (
-          <PostThumbnail thumbnail={featuredImage} title={title} unoptimized={true} imageProps={{ quality: 100 }} />
+          <PostThumbnail
+            thumbnail={featuredImage}
+            title={title}
+            unoptimized={true}
+            imageProps={{ quality: 100 }}
+          />
         )}
       </div>
 
@@ -134,8 +150,10 @@ export async function getStaticProps({ params = {} } = {}) {
     socialImage: `${process.env.OG_IMAGE_DIRECTORY}/${params?.slug}.png`,
   };
 
-  const { category: relatedCategory, posts: relatedPosts } = (await getRelatedPosts(categories, postId)) || {};
-  const hasRelated = relatedCategory && Array.isArray(relatedPosts) && relatedPosts.length;
+  const { category: relatedCategory, posts: relatedPosts } =
+    (await getRelatedPosts(categories, postId)) || {};
+  const hasRelated =
+    relatedCategory && Array.isArray(relatedPosts) && relatedPosts.length;
 
   if (hasRelated) {
     props.related = {

@@ -1,6 +1,6 @@
-@import "styles/settings/__settings";
+@import 'styles/settings/__settings';
 
-@import "styles/components/_container";
+@import 'styles/components/_container';
 
 .header {
   width: 100%;
@@ -22,7 +22,7 @@
   align-items: center;
   gap: 0.5rem;
   max-width: 75%;
-  
+
   @media (min-width: 768px) {
     gap: 0.75rem;
     max-width: none;
@@ -36,7 +36,7 @@
 .swordsIcon {
   width: 1.5rem;
   height: 1.5rem;
-  
+
   @media (min-width: 768px) {
     width: 2rem;
     height: 2rem;
@@ -57,12 +57,14 @@
   white-space: normal;
   color: inherit;
   text-decoration: none;
-  
-  &:hover, &:focus, &:active {
+
+  &:hover,
+  &:focus,
+  &:active {
     color: inherit;
     text-decoration: none;
   }
-  
+
   @media (min-width: 768px) {
     font-size: 1.5rem;
     white-space: nowrap;
@@ -73,7 +75,7 @@
   font-size: 0.75rem;
   font-weight: 400;
   margin-left: 0.5rem;
-  
+
   @media (min-width: 768px) {
     font-size: 0.875rem;
   }
@@ -81,7 +83,7 @@
 
 .slogan {
   display: none;
-  
+
   @media (min-width: 768px) {
     display: inline;
   }
@@ -103,7 +105,7 @@
   background-color: #000;
   border-radius: 0.25rem;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background-color: #101010;
   }

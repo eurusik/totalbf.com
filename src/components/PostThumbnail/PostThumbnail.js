@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import styles from './PostThumbnail.module.scss';
 
-function PostThumbnail({ thumbnail, title, unoptimized = true, imageProps = {} }) {
+function PostThumbnail({
+  thumbnail,
+  title,
+  unoptimized = true,
+  imageProps = {},
+}) {
   if (!thumbnail) {
     return null;
   }

@@ -28,7 +28,12 @@ export default function Categories({ categories }) {
         <meta property="og:description" content={metaDescription} />
       </Helmet>
 
-      <WebpageJsonLd title={title} description={metaDescription} siteTitle={siteTitle} slug={slug} />
+      <WebpageJsonLd
+        title={title}
+        description={metaDescription}
+        siteTitle={siteTitle}
+        slug={slug}
+      />
 
       <Container>
         <h1>Categories</h1>
@@ -41,7 +46,9 @@ export default function Categories({ categories }) {
             {categories.map((category) => {
               return (
                 <li key={category.slug}>
-                  <Link href={categoryPathBySlug(category.slug)}>{category.name}</Link>
+                  <Link href={categoryPathBySlug(category.slug)}>
+                    {category.name}
+                  </Link>
                 </li>
               );
             })}
