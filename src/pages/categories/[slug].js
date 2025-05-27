@@ -29,7 +29,7 @@ export default function Category({ category, posts }) {
   );
 }
 
-export async function getServerSideProps({ params = {} } = {}) {
+export async function getStaticProps({ params = {} } = {}) {
   const { category } = await getCategoryBySlug(params?.slug);
 
   if (!category) {
@@ -49,5 +49,15 @@ export async function getServerSideProps({ params = {} } = {}) {
       category,
       posts,
     },
+    // Регенерація сторінки кожні 60 секунд (1 хвилина)
+    revalidate: 60,
+  };
+}
+
+// Необхідно додати getStaticPaths для роботи з динамічними маршрутами
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking',
   };
 }

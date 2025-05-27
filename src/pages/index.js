@@ -52,7 +52,7 @@ export default function Home({ posts, pagination }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { posts, pagination } = await getPaginatedPosts({
     queryIncludes: 'all',
   });
@@ -64,5 +64,7 @@ export async function getServerSideProps() {
         basePath: '/posts',
       },
     },
+    // Регенерація сторінки кожні 60 секунд (1 хвилина)
+    revalidate: 60,
   };
 }

@@ -133,7 +133,7 @@ export default function Post({ post, socialImage }) {
   );
 }
 
-export async function getServerSideProps({ params = {} } = {}) {
+export async function getStaticProps({ params = {} } = {}) {
   const { post } = await getPostBySlug(params?.slug);
 
   if (!post) {
@@ -167,5 +167,17 @@ export async function getServerSideProps({ params = {} } = {}) {
 
   return {
     props,
+    // Регенерація сторінки кожні 60 секунд (1 хвилина)
+    revalidate: 60,
+  };
+}
+
+// Необхідно додати getStaticPaths для роботи з динамічними маршрутами
+export async function getStaticPaths() {
+  // Замість предварительної генерації всіх шляхів, ми використовуємо fallback: 'blocking'
+  // Це означає, що сторінки будуть генеруватися на запит і кешуватися для майбутніх запитів
+  return {
+    paths: [],
+    fallback: 'blocking',
   };
 }

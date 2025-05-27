@@ -31,5 +31,3 @@ export default function Custom500() {
     </Layout>
   );
 }
-
-// Custom error pages cannot have getServerSideProps or getStaticProps

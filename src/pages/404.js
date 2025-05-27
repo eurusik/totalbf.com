@@ -29,5 +29,3 @@ export default function Custom404() {
     </Layout>
   );
 }
-
-// Custom error pages cannot have getServerSideProps or getStaticProps
