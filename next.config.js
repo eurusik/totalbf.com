@@ -25,6 +25,7 @@ const nextConfig = {
 
   images: {
     domains: ['wp.totalbf.com'],
+    formats: ['image/webp'],
   },
 
   // By enabling verbose logging, it will provide additional output details for
