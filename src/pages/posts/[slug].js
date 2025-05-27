@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Helmet } from 'react-helmet';
 
 import { getPostBySlug, getRelatedPosts } from 'lib/posts';
@@ -60,9 +61,16 @@ export default function Post({ post, socialImage }) {
 
   const helmetSettings = helmetSettingsFromMetadata(metadata);
 
+  const pageTitle = helmetSettings.title;
+  const helmetSettingsWithoutTitle = { ...helmetSettings };
+  delete helmetSettingsWithoutTitle.title;
+
   return (
     <Layout>
-      <Helmet {...helmetSettings} />
+      <Head>
+        <title>{pageTitle}</title>
+      </Head>
+      <Helmet {...helmetSettingsWithoutTitle} />
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
