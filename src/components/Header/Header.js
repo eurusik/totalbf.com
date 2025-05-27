@@ -1,6 +1,7 @@
-import { Search, MessageSquare, Twitter, Swords } from 'lucide-react';
+import { MessageSquare, Twitter, Swords } from 'lucide-react';
 import socialLinks from 'config/social-links';
 import Link from 'next/link';
+import Search from 'components/Search';
 
 import styles from './Header.module.scss';
 
@@ -19,9 +20,9 @@ function TwitterIcon() {
 
 function SearchIcon() {
   return (
-    <a href={socialLinks.search} className={styles.socialIcon}>
-      <Search className={styles.iconSvg} />
-    </a>
+    <div className={styles.socialIcon}>
+      <Search />
+    </div>
   );
 }
 
