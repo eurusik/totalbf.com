@@ -1,4 +1,3 @@
-import NextApp from 'next/app';
 import { SiteContext, useSiteContext } from 'hooks/use-site';
 import { SearchProvider } from 'hooks/use-search';
 import siteConfig from 'config/site-config';
@@ -42,9 +41,8 @@ function App({
   );
 }
 
-App.getInitialProps = async function (appContext) {
-  const appProps = await NextApp.getInitialProps(appContext);
-
+// Використовуємо getStaticProps замість getInitialProps
+export async function getStaticProps() {
   const { posts: recentPosts } = await getRecentPosts({
     count: 5,
     queryIncludes: 'index',
@@ -55,14 +53,18 @@ App.getInitialProps = async function (appContext) {
   });
 
   const { menus = [] } = await getAllMenus();
+  const metadata = await getSiteMetadata();
 
   return {
-    ...appProps,
-    metadata: await getSiteMetadata(),
-    recentPosts,
-    categories,
-    menus,
+    props: {
+      metadata,
+      recentPosts,
+      categories,
+      menus,
+    },
+    // Оновлюємо дані кожну хвилину
+    revalidate: 60,
   };
-};
+}
 
 export default App;
