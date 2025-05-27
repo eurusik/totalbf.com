@@ -44,8 +44,7 @@ export default function Post({ post, socialImage }) {
     metadata: {
       ...post,
       title: metaTitle,
-      description:
-        description || post.og?.description || `Read more about ${title}`,
+      description: description || post.og?.description || `${title}`,
     },
   });
 

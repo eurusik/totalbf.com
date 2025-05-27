@@ -33,8 +33,7 @@ export default function Page({ page, breadcrumbs }) {
     metadata: {
       ...page,
       title: metaTitle,
-      description:
-        description || page.og?.description || `Read more about ${title}`,
+      description: description || page.og?.description || `${title}`,
     },
   });
 
