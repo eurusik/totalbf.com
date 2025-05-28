@@ -96,6 +96,21 @@ ul {
   padding-left: 1.2em;
 }
 
+.wp-block-list {
+  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    Arial, sans-serif;
+
+  li {
+    font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
+      var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+      Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.8em;
+  }
+}
+
 a {
   font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
     var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
