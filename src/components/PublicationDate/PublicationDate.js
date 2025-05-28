@@ -1,6 +1,4 @@
 const PublicationDate = ({ date }) => {
-  const publicationDateLabel = 'Дата публікації:';
-
   const getStaticDateFormat = (dateString) => {
     try {
       const d = new Date(dateString);
@@ -17,7 +15,7 @@ const PublicationDate = ({ date }) => {
 
   return (
     <time pubdate="pubdate" dateTime={date}>
-      {publicationDateLabel} {staticDate}
+      {staticDate}
     </time>
   );
 };
