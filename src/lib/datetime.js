@@ -49,6 +49,11 @@ export function formatDateTime(dateString) {
  * @returns {string} Relative time string
  */
 export function formatRelativeTime(dateString, translations) {
+  // Return empty string during server-side rendering to prevent hydration mismatch
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
   const date = new Date(dateString);
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - date.getTime());

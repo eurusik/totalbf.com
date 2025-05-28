@@ -54,10 +54,17 @@ const Metadata = ({
         <li className={styles.metadataCategories}>
           {compactCategories && (
             <p title={categories.map(({ name }) => name).join(', ')}>
-              <Link href={categoryPathBySlug(categories[0].slug)}>
-                {categories[0].name}
-              </Link>
-              {categories.length > 1 && ' and more'}
+              {categories
+                .slice(0, Math.min(3, categories.length))
+                .map((category, index, array) => (
+                  <span key={category.slug}>
+                    <Link href={categoryPathBySlug(category.slug)}>
+                      {category.name}
+                    </Link>
+                    {index < array.length - 1 && ', '}
+                  </span>
+                ))}
+              {categories.length > 3 && ' і ще'}
             </p>
           )}
           {!compactCategories && (

@@ -1,49 +1,18 @@
-import { formatRelativeTime } from 'lib/datetime';
+import { useState, useEffect } from 'react';
+import { formatDate } from 'lib/datetime';
 
 const PublicationDate = ({ date }) => {
-  const dateTimeLabels = {
-    publicationDate: 'Дата публікації:',
-    justNow: 'щойно',
-    yesterday: 'вчора',
-    ago: 'тому',
-    day: 'день',
-    days: 'дні',
-    manyDays: 'днів',
-    hour: 'година',
-    hours: 'години',
-    manyHours: 'годин',
-    minute: 'хвилина',
-    minutes: 'хвилини',
-    manyMinutes: 'хвилин',
-    second: 'секунда',
-    seconds: 'секунди',
-    manySeconds: 'секунд',
-  };
+  const [formattedDate, setFormattedDate] = useState('');
+
+  const publicationDateLabel = 'Дата публікації:';
+
+  useEffect(() => {
+    setFormattedDate(formatDate(date));
+  }, [date]);
 
   return (
     <time pubdate="pubdate" dateTime={date}>
-      {dateTimeLabels.publicationDate}{' '}
-      {formatRelativeTime(
-        date,
-        {
-          justNow: dateTimeLabels.justNow,
-          yesterday: dateTimeLabels.yesterday,
-          ago: dateTimeLabels.ago,
-          day: dateTimeLabels.day,
-          days: dateTimeLabels.days,
-          manyDays: dateTimeLabels.manyDays,
-          hour: dateTimeLabels.hour,
-          hours: dateTimeLabels.hours,
-          manyHours: dateTimeLabels.manyHours,
-          minute: dateTimeLabels.minute,
-          minutes: dateTimeLabels.minutes,
-          manyMinutes: dateTimeLabels.manyMinutes,
-          second: dateTimeLabels.second,
-          seconds: dateTimeLabels.seconds,
-          manySeconds: dateTimeLabels.manySeconds,
-        },
-        'uk-UA'
-      )}
+      {publicationDateLabel} {formattedDate}
     </time>
   );
 };
