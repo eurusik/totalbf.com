@@ -103,4 +103,38 @@
     text-align: center;
     font-style: italic;
   }
+
+  // Styling for video elements to match YouTube embeds
+  .wp-block-video {
+    display: block;
+    margin: 2rem auto;
+    max-width: 100%;
+    position: relative;
+
+    @media (max-width: 768px) {
+      margin: 1.5rem auto;
+    }
+
+    video {
+      border-radius: 8px !important;
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      background-color: black;
+
+      @media (min-width: 768px) {
+        max-width: 100%;
+        border-radius: 8px !important;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-media-controls {
+        opacity: 0.9;
+      }
+    }
+  }
 }
