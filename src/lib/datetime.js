@@ -5,9 +5,14 @@
 /**
  * Format a date string to a localized format (DD.MM.YYYY)
  * @param {string} dateString - The date string to format
- * @returns {string} Formatted date string
+ * @returns {string} Formatted date string or empty string if on server
  */
 export function formatDate(dateString) {
+  // Return empty string during server-side rendering to prevent hydration mismatch
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
   const date = new Date(dateString);
   return date.toLocaleDateString('uk-UA', {
     day: '2-digit',
@@ -19,9 +24,14 @@ export function formatDate(dateString) {
 /**
  * Format a date string to a full format with time
  * @param {string} dateString - The date string to format
- * @returns {string} Formatted date and time string
+ * @returns {string} Formatted date and time string or empty string if on server
  */
 export function formatDateTime(dateString) {
+  // Return empty string during server-side rendering to prevent hydration mismatch
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
   const date = new Date(dateString);
   return date.toLocaleString('uk-UA', {
     day: '2-digit',
