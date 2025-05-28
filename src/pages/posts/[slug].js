@@ -106,7 +106,7 @@ export default function Post({ post, socialImage }) {
             <div
               className={styles.content}
               dangerouslySetInnerHTML={{
-                __html: content,
+                __html: content?.replace(/class="mtz-vlc-[^"]*"/g, ''),
               }}
             />
           </Container>
