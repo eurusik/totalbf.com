@@ -9,7 +9,7 @@ import { FaMapPin } from 'react-icons/fa';
 import styles from './Metadata.module.scss';
 
 const DEFAULT_METADATA_OPTIONS = {
-  compactCategories: true,
+  compactCategories: false,
 };
 
 const Metadata = ({
@@ -17,76 +17,82 @@ const Metadata = ({
   author,
   date,
   categories,
-  options = DEFAULT_METADATA_OPTIONS,
   isSticky = false,
+  options = DEFAULT_METADATA_OPTIONS,
 }) => {
   const metadataClassName = new ClassName(styles.metadata);
 
   metadataClassName.addIf(className, className);
 
-  const { compactCategories } = options;
+  const renderCategories = () => {
+    if (!Array.isArray(categories) || categories.length === 0) {
+      return null;
+    }
+
+    const maxVisible = options.compactCategories ? 3 : categories.length;
+    const visibleCategories = categories.slice(0, maxVisible);
+    const remainingCount = categories.length - maxVisible;
+
+    return (
+      <div className={styles.metadataCategories}>
+        {visibleCategories.map((category) => (
+          <Link
+            key={category.slug}
+            href={categoryPathBySlug(category.slug)}
+            className={styles.categoryTag}
+          >
+            {category.name}
+          </Link>
+        ))}
+        {remainingCount > 0 && (
+          <span className={styles.moreCategories}>+{remainingCount} ще</span>
+        )}
+      </div>
+    );
+  };
 
   return (
-    <ul className={metadataClassName.toString()}>
-      {author && (
-        <li className={styles.metadataAuthor}>
-          <address>
-            {author.avatar && (
-              <img
-                width={author.avatar.width}
-                height={author.avatar.height}
-                src={author.avatar.url}
-                alt="Author Avatar"
-              />
-            )}
-            <Link href={authorPathByName(author.name)} rel="author">
-              {author.name}
-            </Link>
-          </address>
-        </li>
-      )}
-      {date && (
-        <li>
-          <PublicationDate date={date} />
-        </li>
-      )}
-      {Array.isArray(categories) && categories[0] && (
-        <li className={styles.metadataCategories}>
-          {compactCategories && (
-            <p title={categories.map(({ name }) => name).join(', ')}>
-              {categories
-                .slice(0, Math.min(3, categories.length))
-                .map((category, index, array) => (
-                  <span key={category.slug}>
-                    <Link href={categoryPathBySlug(category.slug)}>
-                      {category.name}
+    <ul className={`${metadataClassName.toString()} ${styles.metadataLayout}`}>
+      <div className={styles.metadataLeft}>
+        {author && (
+          <li className={styles.metadataAuthor}>
+            <div className={styles.authorContainer}>
+              <address>
+                {author.avatar && (
+                  <img
+                    width={author.avatar.width}
+                    height={author.avatar.height}
+                    src={author.avatar.url || '/placeholder.svg'}
+                    alt="Author Avatar"
+                  />
+                )}
+                <div className={styles.authorInfo}>
+                  <span className={styles.authorName}>
+                    <Link href={authorPathByName(author.name)} rel="author">
+                      {author.name}
                     </Link>
-                    {index < array.length - 1 && ', '}
                   </span>
-                ))}
-              {categories.length > 3 && ' і ще'}
-            </p>
-          )}
-          {!compactCategories && (
-            <ul>
-              {categories.map((category) => {
-                return (
-                  <li key={category.slug}>
-                    <Link href={categoryPathBySlug(category.slug)}>
-                      {category.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </li>
-      )}
-      {isSticky && (
-        <li className={styles.metadataSticky}>
-          <FaMapPin aria-label="Sticky Post" />
-        </li>
-      )}
+                  {renderCategories()}
+                </div>
+              </address>
+            </div>
+          </li>
+        )}
+      </div>
+
+      <div className={styles.metadataRight}>
+        {date && (
+          <li>
+            <PublicationDate date={date} />
+          </li>
+        )}
+
+        {isSticky && (
+          <li className={styles.metadataSticky}>
+            <FaMapPin aria-label="Sticky Post" />
+          </li>
+        )}
+      </div>
     </ul>
   );
 };

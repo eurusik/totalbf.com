@@ -81,14 +81,6 @@ export default function Post({ post, socialImage }) {
             __html: title,
           }}
         />
-        <Metadata
-          className={styles.postMetadata}
-          date={date}
-          author={author}
-          categories={categories}
-          options={metadataOptions}
-          isSticky={isSticky}
-        />
 
         {featuredImage && (
           <PostThumbnail
@@ -108,6 +100,14 @@ export default function Post({ post, socialImage }) {
               dangerouslySetInnerHTML={{
                 __html: content?.replace(/class="mtz-vlc-[^"]*"/g, ''),
               }}
+            />
+            <Metadata
+              className={styles.postMetadata}
+              date={date}
+              author={author}
+              categories={categories}
+              options={metadataOptions}
+              isSticky={isSticky}
             />
           </Container>
         </Section>

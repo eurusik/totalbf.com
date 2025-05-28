@@ -1,18 +1,23 @@
-import { useState, useEffect } from 'react';
-import { formatDate } from 'lib/datetime';
-
 const PublicationDate = ({ date }) => {
-  const [formattedDate, setFormattedDate] = useState('');
-
   const publicationDateLabel = 'Дата публікації:';
 
-  useEffect(() => {
-    setFormattedDate(formatDate(date));
-  }, [date]);
+  const getStaticDateFormat = (dateString) => {
+    try {
+      const d = new Date(dateString);
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}.${month}.${year}`;
+    } catch (e) {
+      return '';
+    }
+  };
+
+  const staticDate = getStaticDateFormat(date);
 
   return (
     <time pubdate="pubdate" dateTime={date}>
-      {publicationDateLabel} {formattedDate}
+      {publicationDateLabel} {staticDate}
     </time>
   );
 };

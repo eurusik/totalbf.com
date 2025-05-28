@@ -2,21 +2,17 @@
 
 .metadata {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   color: $color-gray-100;
   list-style: none;
   padding: 0;
-  margin: 0 -0.8em;
+  margin: 0;
+  width: 100%;
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-
-  & > li {
-    margin: 0.8em;
   }
 
   p {
@@ -34,39 +30,113 @@
   }
 }
 
+.metadataLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.metadataLeft {
+  flex: 2;
+  min-width: 120px;
+  text-align: left;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.metadataRight {
+  flex: 1;
+  min-width: 120px;
+  text-align: right;
+  margin-left: auto;
+}
+
 .metadataAuthor {
   a {
     margin-left: 0.2em;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
   }
 
   address {
     display: flex;
     align-items: center;
     font-style: normal;
+    max-width: 100%;
+    overflow: hidden;
+
+    .authorInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 0.2em;
+      max-width: calc(100% - 1.8em);
+      overflow: hidden;
+      gap: 0.3em;
+    }
   }
 
   img {
     width: 1.4em;
     height: auto;
     border-radius: 50%;
-    margin-right: 0.5em;
+    margin-right: 0.2em;
   }
 }
 
+.authorContainer {
+  display: flex;
+  align-items: center;
+}
+
+.authorName {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+}
+
 .metadataCategories {
-  li {
-    display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  flex-wrap: wrap;
+  margin-top: 0.2em;
 
-    &:after {
-      content: ', ';
-      margin-right: 0.4em;
-    }
+  .categoryTag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15em 0.5em;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333333;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+    color: #b1bdca;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
 
-    &:last-child {
-      &:after {
-        content: none;
-      }
+    &:hover {
+      background: rgba(0, 0, 0, 0.7);
+      border-color: #444444;
+      color: #ffffff;
+      text-decoration: none;
     }
+  }
+
+  .moreCategories {
+    font-size: 0.75em;
+    color: #8a99a8;
+    font-style: italic;
+    padding: 0.15em 0.3em;
   }
 }
 
