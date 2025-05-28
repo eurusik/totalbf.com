@@ -7,7 +7,7 @@ import { getRecentPosts } from 'lib/posts';
 import { getCategories } from 'lib/categories';
 import NextNProgress from 'nextjs-progressbar';
 import { getAllMenus } from 'lib/menus';
-import { inter, roboto } from 'lib/fonts';
+import { inter, roboto, bebasNeue } from 'lib/fonts';
 
 import 'styles/globals.scss';
 import 'styles/wordpress.scss';
@@ -32,7 +32,9 @@ function App({
   return (
     <SiteContext.Provider value={site}>
       <SearchProvider>
-        <div className={`${inter.variable} ${roboto.variable}`}>
+        <div
+          className={`${inter.variable} ${roboto.variable} ${bebasNeue.variable}`}
+        >
           <NextNProgress height={4} color={variables.progressbarColor} />
           <Component {...pageProps} />
         </div>

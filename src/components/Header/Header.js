@@ -1,4 +1,5 @@
-import { MessageSquare, Twitter, Swords } from 'lucide-react';
+import { MessageSquare, Twitter } from 'lucide-react';
+import { GiShotgunRounds } from 'react-icons/gi';
 import socialLinks from 'config/social-links';
 import Link from 'next/link';
 import Search from 'components/Search';
@@ -52,7 +53,7 @@ function SocialIcons() {
 function Logo() {
   return (
     <div className={styles.logoIcon}>
-      <Swords className={styles.swordsIcon} />
+      <GiShotgunRounds className={styles.swordsIcon} />
     </div>
   );
 }
