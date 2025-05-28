@@ -47,6 +47,15 @@
   &:hover {
     color: $color-yellow-500;
   }
+
+  h1 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    display: inline;
+  }
 }
 
 .commentsCount {

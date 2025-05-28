@@ -18,7 +18,7 @@ function PostTitle({ title, comments, slug }) {
         title={title}
         className={styles.postTitleLink}
       >
-        <span dangerouslySetInnerHTML={{ __html: title }} />
+        <h1 dangerouslySetInnerHTML={{ __html: title }} />
       </Link>
       {comments !== undefined && (
         <span className={styles.commentsCount} title="Коментарі">
