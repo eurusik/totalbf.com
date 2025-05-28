@@ -63,7 +63,7 @@ const Metadata = ({
                     width={author.avatar.width}
                     height={author.avatar.height}
                     src={author.avatar.url || '/placeholder.svg'}
-                    alt="Author Avatar"
+                    alt="Аватар автора"
                   />
                 )}
                 <div className={styles.authorInfo}>
