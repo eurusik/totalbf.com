@@ -167,7 +167,6 @@ figure img {
   border-radius: 8px;
 }
 
-// Global video styling to ensure it works with WordPress content
 figure.wp-block-video,
 .wp-block-video,
 figure:has(video) {
@@ -186,5 +185,120 @@ figure:has(video) {
     &:focus {
       outline: none;
     }
+  }
+}
+
+blockquote,
+.wp-block-quote,
+blockquote.wp-block-quote,
+blockquote.is-layout-flow,
+.wp-block-quote-is-layout-flow {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 10, 20, 0.92) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(5, 10, 20, 0.92) 100%
+  );
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+blockquote::before,
+.wp-block-quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(148, 163, 184, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+blockquote::after,
+.wp-block-quote::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+blockquote p,
+.wp-block-quote p {
+  color: #e2e8f0 !important;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.625;
+  padding-left: 24px;
+  margin: 0;
+}
+
+blockquote em,
+.wp-block-quote em {
+  color: #f1f5f9 !important;
+  font-weight: 500;
+  font-style: italic;
+}
+
+blockquote strong,
+.wp-block-quote strong {
+  color: #f8fafc !important;
+  font-weight: 600;
+  font-style: normal;
+  display: inline-block;
+}
+
+blockquote br,
+.wp-block-quote br {
+  display: block;
+  content: '';
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+blockquote br + strong,
+.wp-block-quote br + strong {
+  margin-top: 8px;
+}
+
+.quote-mark {
+  color: #94a3b8;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  blockquote,
+  .wp-block-quote {
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  blockquote p,
+  .wp-block-quote p {
+    font-size: 16px;
+    padding-left: 20px;
   }
 }
