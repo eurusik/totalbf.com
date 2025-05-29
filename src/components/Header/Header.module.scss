@@ -31,6 +31,7 @@
 
 .logoIcon {
   flex-shrink: 0;
+  display: flex;
 }
 
 .swordsIcon {
@@ -65,7 +66,7 @@
   }
 
   @media (min-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
     white-space: nowrap;
   }
 }
@@ -74,9 +75,11 @@
   font-size: 0.75rem;
   font-weight: 400;
   margin-left: 0.5rem;
+  top: -10px;
 
   @media (min-width: 768px) {
     font-size: 0.875rem;
+    top: -12px;
   }
 }
 
@@ -85,7 +88,6 @@
 
   @media (min-width: 768px) {
     display: inline;
-    font-size: 1.25rem;
   }
 }
 
