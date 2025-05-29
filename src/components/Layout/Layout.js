@@ -9,6 +9,7 @@ import Main from 'components/Main';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -71,6 +72,7 @@ const Layout = ({ children }) => {
         <Header />
         <Main>{children}</Main>
         <Analytics />
+        <SpeedInsights />
         <Footer />
       </div>
     </div>
