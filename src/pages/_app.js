@@ -8,6 +8,8 @@ import { getCategories } from 'lib/categories';
 import NextNProgress from 'nextjs-progressbar';
 import { getAllMenus } from 'lib/menus';
 import { inter, roboto, bebasNeue } from 'lib/fonts';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import 'styles/globals.scss';
 import 'styles/wordpress.scss';
@@ -37,6 +39,8 @@ function App({
         >
           <NextNProgress height={4} color={variables.progressbarColor} />
           <Component {...pageProps} />
+          <Analytics />
+          <SpeedInsights />
         </div>
       </SearchProvider>
     </SiteContext.Provider>
