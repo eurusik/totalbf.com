@@ -8,6 +8,7 @@ import { helmetSettingsFromMetadata } from 'lib/site';
 import Main from 'components/Main';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import { Analytics } from '@vercel/analytics/next';
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -69,6 +70,7 @@ const Layout = ({ children }) => {
         <Helmet {...helmetSettings} />
         <Header />
         <Main>{children}</Main>
+        <Analytics />
         <Footer />
       </div>
     </div>
