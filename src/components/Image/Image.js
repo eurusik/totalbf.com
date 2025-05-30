@@ -1,4 +1,5 @@
 import ClassName from 'models/classname';
+import NextImage from 'next/image';
 
 import styles from './Image.module.scss';
 
@@ -20,7 +21,7 @@ const Image = ({
   return (
     <figure className={imageClassName.toString()}>
       <div className={styles.featuredImageImg}>
-        <img
+        <NextImage
           width={width}
           height={height}
           src={src}

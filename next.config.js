@@ -28,7 +28,7 @@ const nextConfig = {
   runtime: 'nodejs',
 
   images: {
-    domains: ['wp.totalbf.com'],
+    domains: ['wp.totalbf.com', 'secure.gravatar.com'],
     formats: ['image/webp'],
   },
 

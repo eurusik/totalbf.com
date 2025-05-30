@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { categoryPathBySlug } from 'lib/categories';
 import { authorPathByName } from 'lib/users';
@@ -59,7 +60,7 @@ const Metadata = ({
             <div className={styles.authorContainer}>
               <address>
                 {author.avatar && (
-                  <img
+                  <Image
                     width={author.avatar.width}
                     height={author.avatar.height}
                     src={author.avatar.url || '/placeholder.svg'}
