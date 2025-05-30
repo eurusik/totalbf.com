@@ -10,6 +10,7 @@ import { getAllMenus } from 'lib/menus';
 import { inter, roboto, bebasNeue } from 'lib/fonts';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import Script from 'next/script';
 
 import 'styles/globals.scss';
 import 'styles/wordpress.scss';
@@ -41,6 +42,26 @@ function App({
           <Component {...pageProps} />
           <Analytics />
           <SpeedInsights />
+          {siteConfig.analytics.enabled && (
+            <>
+              <Script
+                strategy="afterInteractive"
+                src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.googleAnalyticsId}`}
+              />
+              <Script
+                id="ga-init"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${siteConfig.analytics.googleAnalyticsId}');
+                  `,
+                }}
+              />
+            </>
+          )}
         </div>
       </SearchProvider>
     </SiteContext.Provider>
