@@ -40,7 +40,7 @@ $color-quote-mark: $color-gray-400;
   background: linear-gradient($direction, $colors);
 }
 
-/* Шрифти */
+// Fonts
 @font-face {
   font-family: 'Segoe UI';
   font-style: normal;
@@ -327,5 +327,23 @@ blockquote br + strong,
   .wp-block-quote p {
     font-size: 16px;
     padding-left: 20px;
+  }
+}
+
+.wp-block-embed.is-type-rich.is-provider-twitter.wp-block-embed-twitter {
+  margin: 2rem auto;
+  max-width: 550px;
+
+  .wp-block-embed__wrapper {
+    position: relative;
+    @include border-radius(16px);
+    overflow: hidden;
+    background-color: rgba(15, 23, 42, 0.05);
+  }
+
+  iframe {
+    width: 100% !important;
+    margin: 0 auto;
+    display: block;
   }
 }
