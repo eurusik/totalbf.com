@@ -330,20 +330,170 @@ blockquote br + strong,
   }
 }
 
-.wp-block-embed.is-type-rich.is-provider-twitter.wp-block-embed-twitter {
+// Twitter embed styles
+$twitter-embed-selector: 'figure.wp-block-embed.is-type-rich.is-provider-twitter.wp-block-embed-twitter';
+$twitter-blue: rgba(29, 161, 242, 0.6);
+$twitter-blue-light: rgba(29, 161, 242, 0.3);
+$twitter-blue-faded: rgba(29, 161, 242, 0.02);
+$twitter-blue-border: rgba(29, 161, 242, 0.2);
+$twitter-bg-dark: rgba(15, 23, 42, 0.7);
+$twitter-bg-medium: rgba(30, 41, 59, 0.5);
+$twitter-bg-darker: rgba(15, 23, 42, 0.8);
+$twitter-text-color: $color-gray-100;
+$twitter-link-color: $color-blue-300;
+$twitter-link-hover: $color-blue-200;
+
+#{$twitter-embed-selector} {
   margin: 2rem auto;
   max-width: 550px;
+  position: relative;
+
+  figcaption.wp-element-caption {
+    text-align: center;
+    font-style: italic;
+    color: $color-gray-300;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-left: auto;
+    margin-right: auto;
+
+    em {
+      color: $color-gray-100;
+      font-weight: 500;
+    }
+  }
 
   .wp-block-embed__wrapper {
     position: relative;
-    @include border-radius(16px);
-    overflow: hidden;
-    background-color: rgba(15, 23, 42, 0.05);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    .twitter-tweet-rendered {
+      display: flex !important;
+      max-width: 550px !important;
+      width: 100% !important;
+      margin: 10px auto !important;
+
+      iframe {
+        width: 100% !important;
+        margin: 0 auto !important;
+        border: none !important;
+        min-height: 428px;
+      }
+    }
   }
 
-  iframe {
-    width: 100% !important;
+  blockquote.twitter-tweet {
+    position: relative;
+    z-index: 2;
+    @include border-radius(16px);
+    overflow: hidden;
+    @include gradient-background(
+      135deg,
+      $twitter-bg-dark 0%,
+      $twitter-bg-medium 50%,
+      $twitter-bg-darker 100%
+    );
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     margin: 0 auto;
-    display: block;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      sans-serif;
+    color: $twitter-text-color;
+    font-size: 16px;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      @include gradient-background(
+        to bottom,
+        $twitter-blue 0%,
+        $twitter-blue-light 50%,
+        $twitter-blue 100%
+      );
+      box-shadow: 0 0 15px $twitter-blue-light;
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      @include gradient-background(
+        135deg,
+        $twitter-blue-faded 0%,
+        transparent 50%,
+        $twitter-blue-faded 100%
+      );
+      @include border-radius(16px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    &:hover {
+      @include gradient-background(
+        135deg,
+        rgba(15, 23, 42, 0.8) 0%,
+        rgba(30, 41, 59, 0.6) 50%,
+        rgba(15, 23, 42, 0.9) 100%
+      );
+      border-color: $twitter-blue-border;
+    }
+
+    p {
+      position: relative;
+      z-index: 2;
+      color: $twitter-text-color;
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 0 12px 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    a {
+      color: $twitter-link-color;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $twitter-link-hover;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-breakpoint) {
+  #{$twitter-embed-selector} {
+    max-width: 100%;
+    margin: 1rem auto;
+
+    blockquote.twitter-tweet {
+      @include border-radius(12px);
+      padding: 16px;
+      font-size: 14px;
+
+      &::after {
+        @include border-radius(12px);
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
   }
 }
