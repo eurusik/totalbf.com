@@ -1,30 +1,91 @@
 @import 'styles/settings/__settings';
-
 @import 'styles/components/_container';
 
-.header {
-  width: 100%;
-  color: #fff;
+// Variables
+$mobile-breakpoint: 768px;
+$padding-xs: 0.25rem;
+$padding-sm: 0.5rem;
+$padding-md: 0.75rem;
+$padding-lg: 1rem;
+$padding-xl: 1.5rem;
+$gap-sm: 0.5rem;
+$gap-md: 0.75rem;
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+
+// Icon sizes
+$icon-sm: 1rem;
+$icon-md: 1.5rem;
+$icon-lg: 2rem;
+
+// Font sizes
+$font-xs: 0.75rem;
+$font-sm: 0.875rem;
+$font-md: 1rem;
+$font-lg: 1.6rem;
+$font-xl: 2rem;
+
+// Colors
+$color-bg-dark: #000;
+$color-bg-dark-hover: #101010;
+$color-bg-modal: #1a1a1a;
+$color-bg-input: #222;
+$color-border: #333;
+$color-border-focus: #555;
+$color-text-secondary: #999;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
 }
 
-.headerInner {
-  padding: 0.75rem 1rem;
-}
-
-.headerContent {
+@mixin flex-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+@mixin transition($property: background-color, $duration: 0.2s) {
+  transition: $property $duration;
+}
+
+@mixin responsive-media {
+  @media (min-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin responsive-font-size($mobile-size, $desktop-size) {
+  font-size: $mobile-size;
+
+  @media (min-width: $mobile-breakpoint) {
+    font-size: $desktop-size;
+  }
+}
+
+// Header styles
+.header {
+  width: 100%;
+  color: white;
+}
+
+.headerInner {
+  padding: $padding-md $padding-lg;
+}
+
+.headerContent {
+  @include flex-between;
+}
+
+// Logo styles
 .logoContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  @include flex-center;
+  gap: $gap-sm;
   max-width: 75%;
 
-  @media (min-width: 768px) {
-    gap: 0.75rem;
+  @include responsive-media {
+    gap: $gap-md;
     max-width: none;
   }
 }
@@ -35,21 +96,22 @@
 }
 
 .swordsIcon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: $icon-md;
+  height: $icon-md;
 
-  @media (min-width: 768px) {
-    width: 2rem;
-    height: 2rem;
+  @include responsive-media {
+    width: $icon-lg;
+    height: $icon-lg;
   }
 }
 
+// Title styles
 .titleContainer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $font-family-default;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 1.6rem;
+  font-size: $font-lg;
 }
 
 .title {
@@ -65,36 +127,37 @@
     text-decoration: none;
   }
 
-  @media (min-width: 768px) {
-    font-size: 2rem;
+  @include responsive-media {
+    font-size: $font-xl;
     white-space: nowrap;
   }
 }
 
 .version {
-  font-size: 0.75rem;
+  font-size: $font-xs;
   font-weight: 400;
-  margin-left: 0.5rem;
+  margin-left: $padding-sm;
   top: -10px;
 
-  @media (min-width: 768px) {
-    font-size: 0.875rem;
+  @include responsive-media {
+    font-size: $font-sm;
     top: -12px;
   }
 }
 
+// Slogan styles
 .slogan {
   display: none;
 
-  @media (min-width: 768px) {
+  @include responsive-media {
     display: inline;
   }
 }
 
+// Social icons styles
 .socialIcons {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  @include flex-center;
+  gap: $gap-sm;
   flex-shrink: 0;
 }
 
@@ -103,19 +166,18 @@
 }
 
 .socialIcon {
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
+  width: $icon-lg;
+  height: $icon-lg;
+  @include flex-center;
   justify-content: center;
-  background-color: #000;
-  border-radius: 0.25rem;
-  transition: background-color 0.2s;
+  background-color: $color-bg-dark;
+  border-radius: $border-radius-sm;
+  @include transition;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #101010;
+    background-color: $color-bg-dark-hover;
   }
 
   &:disabled {
@@ -125,19 +187,20 @@
 }
 
 .iconSvg {
-  width: 1rem;
-  height: 1rem;
+  width: $icon-sm;
+  height: $icon-sm;
   color: white;
 }
 
+// Search form styles
 .searchForm {
   position: absolute;
   right: 0;
   top: 0;
   z-index: 10;
-  background-color: #1a1a1a;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
+  background-color: $color-bg-modal;
+  border-radius: $border-radius-sm;
+  padding: $padding-sm;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   width: 300px;
 
@@ -148,30 +211,31 @@
 
   input[type='search'] {
     width: 100%;
-    padding: 0.5rem 2rem 0.5rem 0.5rem;
-    border: 1px solid #333;
-    border-radius: 0.25rem;
-    background-color: #222;
+    padding: $padding-sm 2rem $padding-sm $padding-sm;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    background-color: $color-bg-input;
     color: white;
-    font-size: 0.875rem;
+    font-size: $font-sm;
+    font-family: $font-family-default;
 
     &:focus {
       outline: none;
-      border-color: #555;
+      border-color: $color-border-focus;
     }
   }
 
   .closeSearch {
     position: absolute;
-    right: 0.25rem;
+    right: $padding-xs;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #999;
+    color: $color-text-secondary;
     font-size: 1.25rem;
     cursor: pointer;
-    padding: 0.25rem;
+    padding: $padding-xs;
     line-height: 1;
 
     &:hover {
@@ -180,12 +244,13 @@
   }
 }
 
+// Search results styles
 .searchResults {
-  margin-top: 0.5rem;
+  margin-top: $padding-sm;
   max-height: 300px;
   overflow-y: auto;
-  background-color: #1a1a1a;
-  border-radius: 0.25rem;
+  background-color: $color-bg-modal;
+  border-radius: $border-radius-sm;
 
   ul {
     list-style: none;
@@ -196,7 +261,7 @@
   li {
     padding: 0;
     margin: 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid $color-border;
 
     &:last-child {
       border-bottom: none;
@@ -204,29 +269,32 @@
 
     a {
       display: block;
-      padding: 0.5rem;
+      padding: $padding-sm;
       color: white;
       text-decoration: none;
-      transition: background-color 0.2s;
+      font-family: $font-family-default;
+      @include transition;
 
       &:hover,
       &:focus {
-        background-color: #333;
+        background-color: $color-border;
       }
     }
   }
 
   p {
-    padding: 0.5rem;
+    padding: $padding-sm;
     margin: 0;
-    color: #999;
+    color: $color-text-secondary;
+    font-family: $font-family-default;
   }
 }
 
+// Bottom line styles
 .bottomLine {
   width: 100%;
   display: block;
   float: left;
-  border-top: 1px solid #333;
-  margin-top: 0.75rem;
+  border-top: 1px solid $color-border;
+  margin-top: $padding-md;
 }

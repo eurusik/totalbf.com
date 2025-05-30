@@ -1,21 +1,67 @@
+@import 'styles/settings/__settings';
+
+// Variables
+$mobile-breakpoint: 768px;
+$search-button-size: 2rem;
+$search-icon-size: 1rem;
+$border-radius-small: 0.25rem;
+$border-radius-standard: 8px;
+$animation-duration: 0.3s;
+$modal-max-width: 700px;
+$modal-max-height: 80vh;
+$modal-margin: 20px;
+$padding-standard: 1rem;
+$padding-large: 1.5rem;
+
+// Colors
+$color-bg-button: $color-gray-900;
+$color-bg-button-hover: $color-gray-700;
+$color-bg-overlay: rgba(0, 0, 0, 0.9);
+$color-bg-modal: #1a1a1a;
+$color-bg-input: #222;
+$color-border: $color-gray-700;
+$color-input-border: #333;
+$color-input-border-focus: #555;
+$color-input-placeholder: #777;
+$color-text-secondary: #999;
+$color-text-tertiary: #777;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($property: all, $duration: $animation-duration) {
+  transition: $property $duration ease;
+}
+
+@mixin button-reset {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+// Base styles
 .searchContainer {
   position: relative;
 }
 
+// Search button styles
 .searchButton {
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000;
-  border-radius: 0.25rem;
-  transition: all 0.3s ease;
+  width: $search-button-size;
+  height: $search-button-size;
+  @include flex-center;
+  background-color: $color-bg-button;
+  border-radius: $border-radius-small;
+  @include transition;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #333;
+    background-color: $color-bg-button-hover;
     transform: scale(1.05);
   }
 
@@ -25,25 +71,27 @@
   }
 }
 
+// Icon styles
 .searchIcon {
-  width: 1rem;
-  height: 1rem;
+  width: $search-icon-size;
+  height: $search-icon-size;
   color: white;
 }
 
+// Overlay styles
 .searchOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: $color-bg-overlay;
   z-index: 1000;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding-top: 10vh;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn $animation-duration ease-in-out;
   backdrop-filter: blur(5px);
 }
 
@@ -56,18 +104,19 @@
   }
 }
 
+// Modal styles
 .searchModal {
   width: 100%;
-  max-width: 700px;
-  background-color: #1a1a1a;
-  border-radius: 8px;
+  max-width: $modal-max-width;
+  background-color: $color-bg-modal;
+  border-radius: $border-radius-standard;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  animation: slideDown 0.3s ease-out;
-  max-height: 80vh;
+  animation: slideDown $animation-duration ease-out;
+  max-height: $modal-max-height;
   display: flex;
   flex-direction: column;
-  margin: 0 20px;
+  margin: 0 $modal-margin;
 }
 
 @keyframes slideDown {
@@ -81,32 +130,31 @@
   }
 }
 
+// Header styles
 .searchHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #333;
+  padding: $padding-standard $padding-large;
+  border-bottom: 1px solid $color-input-border;
 
   h2 {
     margin: 0;
     color: white;
     font-size: 1.5rem;
     font-weight: 500;
+    font-family: $font-family-default;
   }
 }
 
+// Close button styles
 .closeButton {
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
+  @include button-reset;
+  color: $color-text-secondary;
   padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   border-radius: 50%;
-  transition: all 0.2s ease;
+  @include transition(all, 0.2s);
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -114,71 +162,76 @@
   }
 }
 
+// Form container styles
 .searchFormContainer {
-  padding: 1.5rem;
+  padding: $padding-large;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
+// Input styles
 .inputWrapper {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: $padding-large;
 
   .inputIcon {
     position: absolute;
-    left: 1rem;
+    left: $padding-standard;
     top: 50%;
     transform: translateY(-50%);
-    color: #777;
+    color: $color-text-tertiary;
     pointer-events: none;
   }
 
   input[type='search'] {
     width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    border: 2px solid #333;
-    border-radius: 8px;
-    background-color: #222;
+    padding: $padding-standard $padding-standard $padding-standard 3rem;
+    border: 2px solid $color-input-border;
+    border-radius: $border-radius-standard;
+    background-color: $color-bg-input;
     color: white;
     font-size: 1.125rem;
-    transition: all 0.2s ease;
+    font-family: $font-family-default;
+    @include transition(all, 0.2s);
 
     &:focus {
       outline: none;
-      border-color: #555;
+      border-color: $color-input-border-focus;
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
     }
 
     &::placeholder {
-      color: #777;
+      color: $color-input-placeholder;
     }
   }
 }
 
+// Search results styles
 .searchResults {
   h3 {
-    color: #999;
+    color: $color-text-secondary;
     font-size: 1rem;
-    margin: 0 0 1rem 0;
+    margin: 0 0 $padding-standard 0;
     font-weight: normal;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-family: $font-family-default;
   }
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-radius: 8px;
+    border-radius: $border-radius-standard;
     overflow: hidden;
-    background-color: #222;
+    background-color: $color-bg-input;
   }
 
   li {
     padding: 0;
     margin: 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid $color-input-border;
 
     &:last-child {
       border-bottom: none;
@@ -186,38 +239,41 @@
 
     a {
       display: block;
-      padding: 1rem 1.5rem;
+      padding: $padding-standard $padding-large;
       color: white;
       text-decoration: none;
-      transition: background-color 0.2s;
+      @include transition(background-color, 0.2s);
       position: relative;
+      font-family: $font-family-default;
 
       &:hover,
       &:focus {
-        background-color: #333;
+        background-color: $color-input-border;
 
         &::after {
           content: '→';
           position: absolute;
-          right: 1.5rem;
+          right: $padding-large;
           top: 50%;
           transform: translateY(-50%);
-          color: #777;
+          color: $color-text-tertiary;
         }
       }
     }
   }
 }
 
+// No results styles
 .noResults {
   text-align: center;
   padding: 2rem;
-  background-color: #222;
-  border-radius: 8px;
+  background-color: $color-bg-input;
+  border-radius: $border-radius-standard;
 
   p {
     margin: 0.5rem 0;
-    color: #999;
+    color: $color-text-secondary;
+    font-family: $font-family-default;
 
     strong {
       color: white;

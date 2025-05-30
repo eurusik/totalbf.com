@@ -1,7 +1,7 @@
 @import 'styles/settings/__settings';
 @import 'style.css';
 
-// Font family variable to avoid duplication
+// Variables
 $font-family-main: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
   var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial,
   sans-serif;
@@ -9,6 +9,36 @@ $font-family-main: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
 $font-family-heading: 'Segoe UI', 'Segoe UI Lights', var(--font-roboto),
   var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial,
   sans-serif;
+
+$mobile-breakpoint: 768px;
+$border-radius-standard: 8px;
+$border-radius-video: 18px;
+$border-radius-quote: 12px;
+
+// Additional variables (using colors from _colors.scss)
+$color-border-light: $color-gray-200;
+$color-background-black: $color-gray-900;
+$color-text-quote: $color-gray-100;
+$color-text-quote-em: $color-gray-50;
+$color-text-quote-strong: white;
+$color-quote-mark: $color-gray-400;
+
+// Mixins
+@mixin font-family($type: 'main') {
+  @if $type == 'main' {
+    font-family: $font-family-main;
+  } @else if $type == 'heading' {
+    font-family: $font-family-heading;
+  }
+}
+
+@mixin border-radius($size: $border-radius-standard) {
+  border-radius: $size;
+}
+
+@mixin gradient-background($direction: 135deg, $colors...) {
+  background: linear-gradient($direction, $colors);
+}
 
 /* Шрифти */
 @font-face {
@@ -89,8 +119,18 @@ h1:first-child {
   margin-top: 1rem;
 }
 
+// Common text styles
+p,
+ul,
+.wp-block-list,
+a,
+span,
+time,
+address {
+  @include font-family('main');
+}
+
 p {
-  font-family: $font-family-main;
   line-height: 1.6;
   margin: 1.2em 0;
 }
@@ -100,10 +140,7 @@ ul {
 }
 
 .wp-block-list {
-  font-family: $font-family-main;
-
   li {
-    font-family: $font-family-main;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 0.8em;
@@ -111,20 +148,10 @@ ul {
 }
 
 a {
-  font-family: $font-family-main;
   color: $color-primary;
 }
 
-span {
-  font-family: $font-family-main;
-}
-
-time {
-  font-family: $font-family-main;
-}
-
 address {
-  font-family: $font-family-main;
   font-style: normal;
 }
 
@@ -162,9 +189,9 @@ figcaption {
 
 figure img {
   background: white;
-  border: 1px solid #c7c7c7;
+  border: 1px solid $color-border-light;
   padding: 0;
-  border-radius: 8px;
+  @include border-radius;
 }
 
 figure.wp-block-video,
@@ -175,12 +202,12 @@ figure:has(video) {
   max-width: 100%;
 
   video {
-    border-radius: 18px !important;
+    @include border-radius($border-radius-video);
     display: block;
     margin: 0 auto;
     width: 100%;
     max-width: 100%;
-    background-color: black;
+    background-color: $color-background-black;
 
     &:focus {
       outline: none;
@@ -194,7 +221,7 @@ blockquote.wp-block-quote,
 blockquote.is-layout-flow,
 .wp-block-quote-is-layout-flow {
   position: relative;
-  background: linear-gradient(
+  @include gradient-background(
     135deg,
     rgba(5, 10, 20, 0.92) 0%,
     rgba(0, 0, 0, 0.5) 50%,
@@ -203,7 +230,7 @@ blockquote.is-layout-flow,
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  @include border-radius($border-radius-quote);
   padding: 24px;
   margin-bottom: 32px;
 }
@@ -216,14 +243,14 @@ blockquote::before,
   top: 0;
   bottom: 0;
   width: 4px;
-  background: linear-gradient(
+  @include gradient-background(
     to bottom,
     rgba(255, 255, 255, 0.3) 0%,
     rgba(148, 163, 184, 0.4) 50%,
     rgba(255, 255, 255, 0.2) 100%
   );
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
+  border-top-left-radius: $border-radius-quote;
+  border-bottom-left-radius: $border-radius-quote;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
@@ -232,19 +259,19 @@ blockquote::after,
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
+  @include gradient-background(
     135deg,
     rgba(255, 255, 255, 0.03) 0%,
     transparent 50%,
     rgba(255, 255, 255, 0.02) 100%
   );
-  border-radius: 12px;
+  @include border-radius($border-radius-quote);
   pointer-events: none;
 }
 
 blockquote p,
 .wp-block-quote p {
-  color: #e2e8f0 !important;
+  color: $color-text-quote !important;
   font-style: italic;
   font-size: 18px;
   line-height: 1.625;
@@ -254,14 +281,14 @@ blockquote p,
 
 blockquote em,
 .wp-block-quote em {
-  color: #f1f5f9 !important;
+  color: $color-text-quote-em !important;
   font-weight: 500;
   font-style: italic;
 }
 
 blockquote strong,
 .wp-block-quote strong {
-  color: #f8fafc !important;
+  color: $color-text-quote-strong !important;
   font-weight: 600;
   font-style: normal;
   display: inline-block;
@@ -281,19 +308,19 @@ blockquote br + strong,
 }
 
 .quote-mark {
-  color: #94a3b8;
+  color: $color-quote-mark;
   font-family: Georgia, serif;
   font-size: 20px;
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mobile-breakpoint) {
   blockquote,
   .wp-block-quote {
     backdrop-filter: blur(12px) saturate(150%);
     -webkit-backdrop-filter: blur(12px) saturate(150%);
     padding: 20px;
-    border-radius: 10px;
+    @include border-radius(10px);
   }
 
   blockquote p,

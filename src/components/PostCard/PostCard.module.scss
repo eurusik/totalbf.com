@@ -1,5 +1,24 @@
 @import 'styles/settings/__settings';
 
+// Variables
+$mobile-breakpoint: 768px;
+$border-radius: 0.8rem;
+
+// Mixins
+@mixin responsive-font($mobile-size, $desktop-size) {
+  font-size: $mobile-size;
+
+  @media (min-width: $mobile-breakpoint) {
+    font-size: $desktop-size;
+  }
+}
+
+// Apply default font to all text elements in the post card
+.postCard {
+  font-family: $font-family-default;
+}
+
+// Card base styles
 .postCard {
   position: relative;
   margin-bottom: 1.5rem;
@@ -8,9 +27,10 @@
   text-align: left;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 0.8rem;
+  border-radius: $border-radius;
 }
 
+// Sticky post styles
 .postCardSticky {
   border: solid 1px $color-yellow-500;
 
@@ -23,26 +43,22 @@
   }
 }
 
+// Title styles
 .postTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 0.5rem;
-  font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
   text-transform: uppercase;
 }
 
 .postTitleLink {
-  font-size: 1.25rem;
+  @include responsive-font(1.25rem, 1.875rem);
   font-weight: 300;
   color: white;
   text-decoration: none;
   margin-right: 0.25rem;
   transition: color 0.2s;
-
-  @media (min-width: 768px) {
-    font-size: 1.875rem;
-  }
 
   &:hover {
     color: $color-yellow-500;
@@ -58,16 +74,12 @@
   }
 }
 
+// Comments styles
 .commentsCount {
   display: flex;
   align-items: center;
-  font-size: 1.125rem;
-  color: #a0aec0;
-  font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
-
-  @media (min-width: 768px) {
-    font-size: 1.25rem;
-  }
+  @include responsive-font(1.125rem, 1.25rem);
+  color: $color-gray-400;
 }
 
 .commentsIcon {
@@ -76,26 +88,23 @@
   margin-right: 0.25rem;
 }
 
+// Content styles
 .postContent {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #333;
-  font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
+  border-bottom: 1px solid $color-gray-700;
   font-size: 1rem;
 }
 
 .postThumbnail {
   height: 100px;
-  margin-top: 2px;
-  margin-right: 10px;
+  margin: 2px 10px 1rem 0;
   border-radius: 4px;
-  border: 2px solid #eee;
-  margin-bottom: 1rem;
+  border: 2px solid $color-gray-100;
 }
 
 .postExcerpt {
   color: white;
-  font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
   font-size: 1rem;
 
   p {
@@ -111,5 +120,4 @@
 
 .postCardMetadata {
   margin: 0;
-  font-family: 'Segoe UI Light', 'Segoe UI', sans-serif;
 }

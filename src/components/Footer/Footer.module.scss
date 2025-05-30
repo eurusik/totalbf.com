@@ -1,21 +1,27 @@
 @import 'styles/settings/__settings';
 
+// Variables
+$mobile-breakpoint: 768px;
+$footer-font-size: 15px;
+$footer-small-font-size: 0.8rem;
+$footer-gap: 1.5rem;
+$footer-link-gap: 1rem;
+
+// Base footer styles
 .footer {
   width: 100%;
   border-top: 1px solid $color-gray-100;
 }
 
-/* Footer Fonts */
+// Footer typography
 .footerFont {
-  font-family: 'Segoe UI Light', 'Segoe UI', var(--font-roboto),
-    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-    Arial, sans-serif;
-  font-size: 15px;
-  color: #ffffff;
+  font-family: $font-family-default;
+  font-size: $footer-font-size;
+  color: white;
   text-align: right;
 
   a {
-    color: #ffffff;
+    color: white;
     text-decoration: none;
 
     &:hover {
@@ -24,11 +30,11 @@
   }
 }
 
-/* Footer Grid Layout */
+// Footer Grid Layout
 .footerGrid {
   display: grid;
-  gap: 1.5rem;
-  font-size: 0.8rem;
+  gap: $footer-gap;
+  font-size: $footer-small-font-size;
   grid-template-columns: 1fr;
   grid-template-areas:
     'copyright'
@@ -37,6 +43,7 @@
   justify-items: center;
   text-align: center;
 
+  // Grid areas
   .copyright {
     grid-area: copyright;
   }
@@ -47,7 +54,7 @@
     .flex {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: $footer-link-gap;
       justify-content: center;
     }
   }
@@ -56,7 +63,8 @@
     grid-area: author;
   }
 
-  @media (min-width: 768px) {
+  // Desktop layout
+  @media (min-width: $mobile-breakpoint) {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'author copyright'
