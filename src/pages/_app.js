@@ -11,6 +11,7 @@ import { inter, roboto, bebasNeue } from 'lib/fonts';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Script from 'next/script';
+import TwitterScript from 'components/TwitterScript';
 
 import 'styles/globals.scss';
 import 'styles/wordpress.scss';
@@ -42,6 +43,7 @@ function App({
           <Component {...pageProps} />
           <Analytics />
           <SpeedInsights />
+          <TwitterScript />
           {siteConfig.analytics.enabled && (
             <>
               <Script
