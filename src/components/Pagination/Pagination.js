@@ -3,7 +3,10 @@ import Link from 'next/link';
 import config from '../../../package.json';
 import { Helmet } from 'react-helmet';
 
-import { GrPrevious as PreviousIcon, GrNext as NextIcon } from 'react-icons/gr';
+import {
+  HiChevronLeft as PreviousIcon,
+  HiChevronRight as NextIcon,
+} from 'react-icons/hi';
 import { HiOutlineDotsHorizontal as Dots } from 'react-icons/hi';
 import styles from './Pagination.module.scss';
 
@@ -67,15 +70,15 @@ const Pagination = ({
       <nav
         className={styles.nav}
         role="navigation"
-        aria-label="Pagination Navigation"
+        aria-label="Навігація сторінками"
       >
         {hasPreviousPage && (
           <Link
             className={styles.prev}
             href={`${path}${currentPage - 1}`}
-            aria-label="Goto Previous Page"
+            aria-label="Перейти на попередню сторінку"
           >
-            <PreviousIcon /> Previous
+            <PreviousIcon /> Попередня
           </Link>
         )}
 
@@ -83,7 +86,7 @@ const Pagination = ({
           {hasPrevDots && (
             <li className={styles.dots}>
               <Dots
-                aria-label={`Navigation to pages 1-${pages[0] - 1} hidden`}
+                aria-label={`Навігація до сторінок 1-${pages[0] - 1} прихована`}
               />
             </li>
           )}
@@ -93,7 +96,7 @@ const Pagination = ({
               <li key={page}>
                 <span
                   className={styles.active}
-                  aria-label={`Current Page, Page ${page}`}
+                  aria-label={`Поточна сторінка, Сторінка ${page}`}
                   aria-current="true"
                 >
                   {page}
@@ -101,7 +104,10 @@ const Pagination = ({
               </li>
             ) : (
               <li key={page}>
-                <Link href={`${path}${page}`} aria-label={`Goto Page ${page}`}>
+                <Link
+                  href={`${path}${page}`}
+                  aria-label={`Перейти на сторінку ${page}`}
+                >
                   <span>{page}</span>
                 </Link>
               </li>
@@ -110,9 +116,9 @@ const Pagination = ({
           {hasNextDots && (
             <li className={styles.dots}>
               <Dots
-                aria-label={`Navigation to pages ${
+                aria-label={`Навігація до сторінок ${
                   pages[pages.length - 1] + 1
-                }-${pagesCount} hidden`}
+                }-${pagesCount} прихована`}
               />
             </li>
           )}
@@ -122,9 +128,9 @@ const Pagination = ({
           <Link
             className={styles.next}
             href={`${path}${currentPage + 1}`}
-            aria-label="Goto Next Page"
+            aria-label="Перейти на наступну сторінку"
           >
-            Next <NextIcon />
+            Наступна <NextIcon />
           </Link>
         )}
       </nav>

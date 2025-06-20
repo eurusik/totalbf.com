@@ -3,7 +3,7 @@
 .nav {
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 6em;
 
   > * {
@@ -15,29 +15,44 @@
   }
 
   a {
-    color: $color-gray-800;
+    color: $color-gray-100;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid $color-gray-200;
-    border-radius: 0.4em;
-    padding: 0.2em 0.8em;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.5em;
+    padding: 0.5em 1.2em;
+    transition: all 0.2s ease;
+
     &:hover {
       color: $color-primary;
-      background-color: $color-gray-50;
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 0 15px rgba(250, 227, 38, 0.15);
+      transform: translateY(-1px);
     }
+
     svg {
-      width: 0.8rem;
+      width: 0.9rem;
+      fill: currentColor;
     }
   }
 
   ul {
     list-style-type: none;
+    display: flex;
+    gap: 0.5em;
   }
 }
 
 .active {
   font-weight: 600;
-  padding: 0.2em 0.8em;
+  padding: 0.5em 1.2em;
+  color: $color-gray-900;
+  background: $color-primary;
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px rgba(250, 227, 38, 0.3);
 }
 
 .pages {
@@ -45,16 +60,62 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
   @media (max-width: 768px) {
     display: none;
   }
+
+  li {
+    a {
+      min-width: 2.5em;
+      height: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .active {
+      min-width: 2.5em;
+      height: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
+
 .prev {
   margin-right: auto;
+
+  svg {
+    margin-right: 0.3em;
+  }
+}
+
+.next {
+  margin-left: auto;
+
+  svg {
+    margin-left: 0.3em;
+  }
 }
 
 .dots {
   display: flex;
-  align-self: flex-end;
-  margin: 0 0.2rem -0.2rem 0.2rem;
+  align-items: center;
+  justify-content: center;
+  color: $color-gray-400;
+  margin: 0 0.2rem;
+
+  svg {
+    width: 1.2em;
+    height: 1.2em;
+  }
 }
