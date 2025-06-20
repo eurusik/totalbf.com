@@ -1,7 +1,10 @@
+'use client';
+
 import Head from 'next/head';
 import { Helmet } from 'react-helmet';
+import Link from 'next/link';
 
-import { getPostBySlug, getRelatedPosts } from 'lib/posts';
+import { getPostBySlug, getRelatedPosts, postPathBySlug } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
 import { ArticleJsonLd } from 'lib/json-ld';
 import { helmetSettingsFromMetadata } from 'lib/site';
@@ -17,7 +20,7 @@ import PostThumbnail from 'components/PostThumbnail/PostThumbnail';
 
 import styles from 'styles/pages/Post.module.scss';
 
-export default function Post({ post, socialImage }) {
+export default function Post({ post, socialImage, related }) {
   const {
     title,
     metaTitle,
@@ -65,6 +68,9 @@ export default function Post({ post, socialImage }) {
   const helmetSettingsWithoutTitle = { ...helmetSettings };
   delete helmetSettingsWithoutTitle.title;
 
+  const relatedPostsList = related?.posts || [];
+  const relatedPostsTitle = related?.title || {};
+
   return (
     <Layout>
       <Head>
@@ -74,23 +80,26 @@ export default function Post({ post, socialImage }) {
 
       <ArticleJsonLd post={post} siteTitle={siteMetadata.title} />
 
-      <div style={{ margin: '0 1rem' }}>
-        <h1
-          className={styles.title}
-          dangerouslySetInnerHTML={{
-            __html: title,
-          }}
-        />
+      <div className={styles.postHeader}>
+        <Container>
+          <h1
+            className={styles.title}
+            dangerouslySetInnerHTML={{
+              __html: title,
+            }}
+          />
+        </Container>
+      </div>
 
-        {featuredImage && (
+      {featuredImage && (
+        <div className={styles.featuredImageContainer}>
           <PostThumbnail
             thumbnail={featuredImage}
             title={title}
             unoptimized={true}
-            imageProps={{ quality: 100 }}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       <Content>
         <Section>
@@ -113,29 +122,33 @@ export default function Post({ post, socialImage }) {
         </Section>
       </Content>
 
-      {/* <Section className={styles.postFooter}>
-        <Container>
-          <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
-          {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
+      {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
+        <Section className={styles.postFooter}>
+          <Container>
             <div className={styles.relatedPosts}>
               {relatedPostsTitle.name ? (
                 <span>
-                  More from <Link href={relatedPostsTitle.link}>{relatedPostsTitle.name}</Link>
+                  Більше з категорії{' '}
+                  <Link href={relatedPostsTitle.link}>
+                    {relatedPostsTitle.name}
+                  </Link>
                 </span>
               ) : (
-                <span>More Posts</span>
+                <span>Схожі статті</span>
               )}
               <ul>
-                {relatedPostsList.map((post) => (
-                  <li key={post.title}>
-                    <Link href={postPathBySlug(post.slug)}>{post.title}</Link>
+                {relatedPostsList.map((relatedPost) => (
+                  <li key={relatedPost.title}>
+                    <Link href={postPathBySlug(relatedPost.slug)}>
+                      {relatedPost.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
-          )}
-        </Container>
-      </Section> */}
+          </Container>
+        </Section>
+      )}
     </Layout>
   );
 }
@@ -174,15 +187,11 @@ export async function getStaticProps({ params = {} } = {}) {
 
   return {
     props,
-    // Регенерація сторінки кожні 60 секунд (1 хвилина)
     revalidate: 60,
   };
 }
 
-// Необхідно додати getStaticPaths для роботи з динамічними маршрутами
 export async function getStaticPaths() {
-  // Замість предварительної генерації всіх шляхів, ми використовуємо fallback: 'blocking'
-  // Це означає, що сторінки будуть генеруватися на запит і кешуватися для майбутніх запитів
   return {
     paths: [],
     fallback: 'blocking',
