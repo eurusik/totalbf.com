@@ -43,3 +43,10 @@ public/images/og
 .vscode/
 # Local Netlify folder
 .netlify
+
+# JetBrains IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
