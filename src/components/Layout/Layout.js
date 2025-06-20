@@ -64,13 +64,17 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.layoutContainer}>
-        <Helmet {...helmetSettings} />
-        <Header />
-        <Main>{children}</Main>
-        <Footer />
-      </div>
+    <div className={styles.layoutContainer}>
+      <Helmet {...helmetSettings} />
+
+      {/* Фонові елементи */}
+      <div className="background-container"></div>
+      <div className="background-image"></div>
+      <div className="background-overlay"></div>
+
+      <Header />
+      <Main>{children}</Main>
+      <Footer />
     </div>
   );
 };
