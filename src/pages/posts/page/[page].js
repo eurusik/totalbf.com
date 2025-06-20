@@ -1,26 +1,30 @@
 import { getPaginatedPosts } from 'lib/posts';
 import usePageMetadata from 'hooks/use-page-metadata';
+import { getSiteMetadata } from 'lib/site';
 
-import TemplateArchive from 'templates/archive';
+import TemplatePosts from 'templates/posts';
 
-export default function Posts({ posts, pagination }) {
-  const title = `All Posts`;
+export default function Posts({ posts, pagination, siteTitle }) {
+  const title = `Всі пости`;
   const slug = 'posts';
+
+  const customPageTitle = `${siteTitle} | Сторінка ${pagination.currentPage}`;
 
   const { metadata } = usePageMetadata({
     metadata: {
-      title,
-      description: `Page ${pagination.currentPage}`,
+      title: customPageTitle,
+      description: `Сторінка ${pagination.currentPage}`,
     },
   });
 
   return (
-    <TemplateArchive
+    <TemplatePosts
       title={title}
       posts={posts}
       slug={slug}
       pagination={pagination}
       metadata={metadata}
+      customPageTitle={customPageTitle}
     />
   );
 }
@@ -28,7 +32,7 @@ export default function Posts({ posts, pagination }) {
 export async function getStaticProps({ params = {} } = {}) {
   const { posts, pagination } = await getPaginatedPosts({
     currentPage: params?.page,
-    queryIncludes: 'archive',
+    queryIncludes: 'all',
   });
 
   if (!pagination.currentPage) {
@@ -38,6 +42,8 @@ export async function getStaticProps({ params = {} } = {}) {
     };
   }
 
+  const siteMetadata = await getSiteMetadata();
+
   return {
     props: {
       posts,
@@ -45,33 +51,12 @@ export async function getStaticProps({ params = {} } = {}) {
         ...pagination,
         basePath: '/posts',
       },
+      siteTitle: siteMetadata.siteTitle,
     },
   };
 }
 
 export async function getStaticPaths() {
-  // By default, we don't render any Pagination pages as
-  // we're considering them non-critical pages
-
-  // To enable pre-rendering of Category pages:
-
-  // 1. Add import to the top of the file
-  //
-  // import { getAllPosts, getPagesCount } from 'lib/posts';
-
-  // 2. Uncomment the below
-  //
-  // const { posts } = await getAllPosts({
-  //   queryIncludes: 'index',
-  // });
-  // const pagesCount = await getPagesCount(posts);
-
-  // const paths = [...new Array(pagesCount)].map((_, i) => {
-  //   return { params: { page: String(i + 1) } };
-  // });
-
-  // 3. Update `paths` in the return statement below to reference the `paths` constant above
-
   return {
     paths: [],
     fallback: 'blocking',

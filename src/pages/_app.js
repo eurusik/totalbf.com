@@ -70,7 +70,6 @@ function App({
   );
 }
 
-// Використовуємо getStaticProps замість getInitialProps
 export async function getStaticProps() {
   const { posts: recentPosts } = await getRecentPosts({
     count: 5,
@@ -91,7 +90,6 @@ export async function getStaticProps() {
       categories,
       menus,
     },
-    // Оновлюємо дані кожну хвилину
     revalidate: 60,
   };
 }

@@ -2,21 +2,21 @@ import usePageMetadata from 'hooks/use-page-metadata';
 
 import { getPaginatedPosts } from 'lib/posts';
 
-import TemplateArchive from 'templates/archive';
+import TemplatePosts from 'templates/posts';
 
 export default function Posts({ posts, pagination }) {
-  const title = 'All Posts';
+  const title = 'Всі пости';
   const slug = 'posts';
 
   const { metadata } = usePageMetadata({
     metadata: {
       title,
-      description: false,
+      description: 'Всі публікації на сайті',
     },
   });
 
   return (
-    <TemplateArchive
+    <TemplatePosts
       title={title}
       posts={posts}
       slug={slug}
@@ -28,7 +28,7 @@ export default function Posts({ posts, pagination }) {
 
 export async function getServerSideProps() {
   const { posts, pagination } = await getPaginatedPosts({
-    queryIncludes: 'archive',
+    queryIncludes: 'all',
   });
   return {
     props: {
