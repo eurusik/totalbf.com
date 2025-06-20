@@ -1,9 +1,15 @@
 @import 'styles/settings/__settings';
 
+$pagination-mobile-breakpoint: 768px;
+$pagination-button-size-mobile: 2.2em;
+$pagination-button-size-desktop: 2.5em;
+
 .nav {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 6em;
 
   > * {
@@ -56,19 +62,22 @@
 }
 
 .pages {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  order: 1;
+  margin-bottom: 1rem;
 
-  @media (max-width: 768px) {
-    display: none;
+  @media (min-width: $pagination-mobile-breakpoint) {
+    width: auto;
+    margin-bottom: 0;
+    order: 2;
   }
 
   li {
     a {
-      min-width: 2.5em;
-      height: 2.5em;
+      min-width: $pagination-button-size-desktop;
+      height: $pagination-button-size-desktop;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,8 +91,8 @@
     }
 
     .active {
-      min-width: 2.5em;
-      height: 2.5em;
+      min-width: $pagination-button-size-desktop;
+      height: $pagination-button-size-desktop;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -92,7 +101,11 @@
 }
 
 .prev {
-  margin-right: auto;
+  order: 2;
+
+  @media (min-width: $pagination-mobile-breakpoint) {
+    order: 1;
+  }
 
   svg {
     margin-right: 0.3em;
@@ -100,7 +113,7 @@
 }
 
 .next {
-  margin-left: auto;
+  order: 3;
 
   svg {
     margin-left: 0.3em;

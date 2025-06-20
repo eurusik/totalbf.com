@@ -78,7 +78,7 @@ const Pagination = ({
             href={`${path}${currentPage - 1}`}
             aria-label="Перейти на попередню сторінку"
           >
-            <PreviousIcon /> Попередня
+            <PreviousIcon /> <span>Попередня</span>
           </Link>
         )}
 
@@ -130,7 +130,7 @@ const Pagination = ({
             href={`${path}${currentPage + 1}`}
             aria-label="Перейти на наступну сторінку"
           >
-            Наступна <NextIcon />
+            <span>Наступна</span> <NextIcon />
           </Link>
         )}
       </nav>
