@@ -1,12 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, Calendar, User, Tag } from 'lucide-react';
+import { FaMapPin } from 'react-icons/fa';
 
 import { postPathBySlug, sanitizeExcerpt } from 'lib/posts';
-import Metadata from 'components/Metadata';
 import PostThumbnail from 'components/PostThumbnail';
-import { FaMapPin } from 'react-icons/fa';
 
 import styles from './PostCard.module.scss';
 
@@ -18,7 +17,7 @@ function PostTitle({ title, comments, slug }) {
         title={title}
         className={styles.postTitleLink}
       >
-        <h1 dangerouslySetInnerHTML={{ __html: title }} />
+        <h2 dangerouslySetInnerHTML={{ __html: title }} />
       </Link>
       {comments !== undefined && (
         <span className={styles.commentsCount} title="Коментарі">
@@ -28,6 +27,48 @@ function PostTitle({ title, comments, slug }) {
       )}
     </div>
   );
+}
+
+function Categories({ categories }) {
+  if (!categories || categories.length === 0) return null;
+
+  return (
+    <div className={styles.categoriesContainer}>
+      {categories.map((category, index) => (
+        <Link
+          key={index}
+          href={`/category/${category.slug}`}
+          className={styles.categoryTag}
+        >
+          <Tag className={styles.categoryIcon} />
+          {category.name}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '';
+
+  try {
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return dateString;
+    }
+
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+
+    return date.toLocaleDateString('uk-UA', options);
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return dateString;
+  }
 }
 
 const PostCard = ({ post, options = {} }) => {
@@ -48,18 +89,9 @@ const PostCard = ({ post, options = {} }) => {
     imageProps = {},
   } = options;
 
-  const metadata = {};
-
-  if (!excludeMetadata.includes('author')) {
-    metadata.author = author;
-  }
-
-  if (!excludeMetadata.includes('date')) {
-    metadata.date = date;
-  }
-
-  if (!excludeMetadata.includes('categories')) {
-    metadata.categories = categories;
+  let avatarUrl = '';
+  if (author && author.avatar && author.avatar.url) {
+    avatarUrl = author.avatar.url;
   }
 
   let postCardStyle = styles.postCard;
@@ -69,18 +101,32 @@ const PostCard = ({ post, options = {} }) => {
   }
 
   return (
-    <div className={postCardStyle}>
+    <article className={postCardStyle}>
       {isSticky && (
-        <FaMapPin aria-label="Sticky Post" className={styles.stickyIcon} />
+        <div className={styles.stickyIndicator}>
+          <FaMapPin aria-label="Sticky Post" className={styles.stickyIcon} />
+        </div>
       )}
-      <PostTitle title={title} comments={comments} slug={slug} />
+
+      {featuredImage && (
+        <div className={styles.featuredImageContainer}>
+          <PostThumbnail
+            thumbnail={featuredImage}
+            title={title}
+            unoptimized={unoptimized}
+            imageProps={imageProps}
+          />
+          <div className={styles.imageOverlay}></div>
+        </div>
+      )}
+
       <div className={styles.postContent}>
-        <PostThumbnail
-          thumbnail={featuredImage}
-          title={title}
-          unoptimized={unoptimized}
-          imageProps={imageProps}
-        />
+        <PostTitle title={title} comments={comments} slug={slug} />
+
+        {!excludeMetadata.includes('categories') && (
+          <Categories categories={categories} />
+        )}
+
         {excerpt && (
           <div
             className={styles.postExcerpt}
@@ -89,9 +135,41 @@ const PostCard = ({ post, options = {} }) => {
             }}
           />
         )}
+
+        <div className={styles.metadataFooter}>
+          <div className={styles.authorContainer}>
+            {!excludeMetadata.includes('author') && author && (
+              <div className={styles.authorInfo}>
+                {avatarUrl ? (
+                  <img
+                    src={avatarUrl}
+                    alt={author.name}
+                    className={styles.authorAvatar}
+                  />
+                ) : (
+                  <div className={styles.authorAvatarPlaceholder}>
+                    <User />
+                  </div>
+                )}
+                <div className={styles.authorName}>
+                  <User className={styles.authorIcon} />
+                  <span>{author.name}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {!excludeMetadata.includes('date') && date && (
+            <div className={styles.dateInfo}>
+              <Calendar className={styles.dateIcon} />
+              <time dateTime={date}>{formatDate(date)}</time>
+            </div>
+          )}
+        </div>
       </div>
-      <Metadata className={styles.postCardMetadata} {...metadata} />
-    </div>
+
+      <div className={styles.hoverOverlay}></div>
+    </article>
   );
 };
 

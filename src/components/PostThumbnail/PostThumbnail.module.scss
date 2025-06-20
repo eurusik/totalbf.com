@@ -2,15 +2,33 @@
 
 .postThumbnail {
   display: block;
-  margin-bottom: 0.5rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  background-color: #0d1117;
 }
 
 .thumbnailImage {
-  height: 150px;
-  margin-top: 2px;
-  margin-right: 10px;
-  border-radius: 8px;
-  max-width: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  transition: transform 0.3s ease;
+  position: relative !important;
+}
+
+@media (max-width: 768px) {
+  .postThumbnail {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .postThumbnail {
+    aspect-ratio: 1 / 1;
+  }
 }
