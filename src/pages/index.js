@@ -1,13 +1,19 @@
 import { getPaginatedPosts } from 'lib/posts';
 import TemplatePosts from 'templates/posts';
+import { getSiteMetadata } from 'lib/site';
 
-export default function Home({ posts, pagination, seoMetadata }) {
+export default function Home({
+  posts,
+  pagination,
+  seoMetadata,
+  customPageTitle,
+}) {
   return (
     <TemplatePosts
-      title="Головна"
       posts={posts}
       pagination={pagination}
       metadata={seoMetadata}
+      customPageTitle={customPageTitle}
     />
   );
 }
@@ -17,8 +23,9 @@ export async function getStaticProps() {
     queryIncludes: 'all',
   });
 
-  const { getSiteMetadata } = await import('lib/site');
-  const seoMetadata = await getSiteMetadata();
+  const siteMetadata = await getSiteMetadata();
+
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
 
   return {
     props: {
@@ -27,7 +34,8 @@ export async function getStaticProps() {
         ...pagination,
         basePath: '/posts',
       },
-      seoMetadata,
+      seoMetadata: siteMetadata,
+      customPageTitle: `${siteName} | Головна`,
     },
     revalidate: 60,
   };

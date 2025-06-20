@@ -1,42 +1,43 @@
+import { getAllPosts } from 'lib/posts';
 import usePageMetadata from 'hooks/use-page-metadata';
-
-import { getPaginatedPosts } from 'lib/posts';
+import { getSiteMetadata } from 'lib/site';
 
 import TemplatePosts from 'templates/posts';
 
-export default function Posts({ posts, pagination }) {
-  const title = 'Всі пости';
+export default function Posts({ posts, customPageTitle }) {
   const slug = 'posts';
 
   const { metadata } = usePageMetadata({
     metadata: {
-      title,
-      description: 'Всі публікації на сайті',
+      title: customPageTitle,
+      description: 'Архів всіх постів на сайті',
     },
   });
 
   return (
     <TemplatePosts
-      title={title}
       posts={posts}
       slug={slug}
-      pagination={pagination}
       metadata={metadata}
+      customPageTitle={customPageTitle}
     />
   );
 }
 
-export async function getServerSideProps() {
-  const { posts, pagination } = await getPaginatedPosts({
+export async function getStaticProps() {
+  const { posts } = await getAllPosts({
     queryIncludes: 'all',
   });
+
+  const siteMetadata = await getSiteMetadata();
+
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
+  const pageTitle = 'Всі пости';
+
   return {
     props: {
       posts,
-      pagination: {
-        ...pagination,
-        basePath: '/posts',
-      },
+      customPageTitle: `${siteName} | ${pageTitle}`,
     },
   };
 }

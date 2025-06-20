@@ -14,7 +14,6 @@ export default function TemplatePosts({
   posts,
   pagination,
   metadata = {},
-  title,
   customPageTitle = null,
 }) {
   const { metadata: siteMetadata = {} } = useSite();
@@ -25,20 +24,18 @@ export default function TemplatePosts({
     setTitle: false,
   });
 
-  const pageTitle = title || 'Всі пости';
   const pageDescription = metadataToUse.description || '';
 
-  const browserTitle =
-    customPageTitle || `${pageTitle} - ${siteMetadata.title}`;
+  const title = customPageTitle || metadataToUse.title;
 
   return (
     <Layout>
       <Head>
-        <title>{browserTitle}</title>
+        <title>{title}</title>
         <meta name="description" content={pageDescription} />
       </Head>
       <Helmet {...helmetSettings} />
-      <WebsiteJsonLd siteTitle={siteMetadata.title} />
+      <WebsiteJsonLd siteTitle={title} />
 
       <Section>
         <Container>

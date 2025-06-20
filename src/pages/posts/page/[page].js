@@ -4,11 +4,8 @@ import { getSiteMetadata } from 'lib/site';
 
 import TemplatePosts from 'templates/posts';
 
-export default function Posts({ posts, pagination, siteTitle }) {
-  const title = `Всі пости`;
+export default function Posts({ posts, pagination, customPageTitle }) {
   const slug = 'posts';
-
-  const customPageTitle = `${siteTitle} | Сторінка ${pagination.currentPage}`;
 
   const { metadata } = usePageMetadata({
     metadata: {
@@ -19,7 +16,6 @@ export default function Posts({ posts, pagination, siteTitle }) {
 
   return (
     <TemplatePosts
-      title={title}
       posts={posts}
       slug={slug}
       pagination={pagination}
@@ -44,6 +40,8 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const siteMetadata = await getSiteMetadata();
 
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
+
   return {
     props: {
       posts,
@@ -51,7 +49,7 @@ export async function getStaticProps({ params = {} } = {}) {
         ...pagination,
         basePath: '/posts',
       },
-      siteTitle: siteMetadata.siteTitle,
+      customPageTitle: `${siteName} | Сторінка ${pagination.currentPage}`,
     },
   };
 }
