@@ -3,7 +3,7 @@
  */
 
 const socialLinks = {
-  twitter: 'https://twitter.com/totalbf',
+  twitter: 'https://x.com/totalbfcom',
   discord: 'https://discord.gg/totalbf',
   search: '/search',
 };
