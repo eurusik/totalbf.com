@@ -1,4 +1,4 @@
-# TotalBF - Все про серію Battlefield
+# TOTALBF - Все про серію Battlefield
 
 <div align="center">
   <img src="public/totalbf.png" alt="TotalBF Logo" width="200" height="auto">
