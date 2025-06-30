@@ -60,7 +60,7 @@ export function useSearchState() {
 
 export default function useSearch({ defaultQuery = null, maxResults } = {}) {
   const search = useContext(SearchContext);
-  const { client } = search;
+  const client = search?.client;
 
   const [query, setQuery] = useState(defaultQuery);
 
