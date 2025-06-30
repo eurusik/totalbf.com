@@ -10,7 +10,7 @@ import { getSiteMetadata } from 'lib/site';
 import styles from 'styles/pages/Error.module.scss';
 
 export default function Custom404({ siteMetadata }) {
-  const siteTitle = siteMetadata?.title;
+  const siteTitle = siteMetadata?.title || 'TOTALBF';
   const pageDescription = 'Сторінку не знайдено';
 
   const site = useSiteContext({
