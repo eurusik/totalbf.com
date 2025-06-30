@@ -25,7 +25,8 @@ export async function getStaticProps() {
 
   const siteMetadata = await getSiteMetadata();
 
-  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle || 'TOTALBF';
+  const pageName = 'Головна';
 
   return {
     props: {
@@ -35,7 +36,7 @@ export async function getStaticProps() {
         basePath: '/posts',
       },
       seoMetadata: siteMetadata,
-      customPageTitle: `${siteName} | Головна`,
+      customPageTitle: `${siteName} | ${pageName}`,
     },
     revalidate: 60,
   };

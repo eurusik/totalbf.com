@@ -10,17 +10,17 @@ import { getSiteMetadata } from 'lib/site';
 import styles from 'styles/pages/Error.module.scss';
 
 export default function Custom404({ siteMetadata }) {
-  const siteTitle = siteMetadata?.title || 'TOTALBF';
-  const pageDescription = 'Сторінку не знайдено';
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle || 'TOTALBF';
+  const pageName = 'Сторінку не знайдено';
 
   const site = useSiteContext({
     metadata: {
-      title: siteTitle,
-      description: pageDescription,
+      title: siteName,
+      description: pageName,
     },
   });
 
-  const pageTitle = `${siteTitle} | ${pageDescription}`;
+  const pageTitle = `${siteName} | ${pageName}`;
 
   return (
     <SiteContext.Provider value={site}>
@@ -34,7 +34,7 @@ export default function Custom404({ siteMetadata }) {
             <div className={styles.errorContainer}>
               <div className={styles.errorContent}>
                 <h1 className={styles.errorTitle}>404</h1>
-                <h2 className={styles.errorSubtitle}>{pageDescription}</h2>
+                <h2 className={styles.errorSubtitle}>{pageName}</h2>
                 <p className={styles.errorMessage}>
                   На жаль, сторінка, яку ви шукаєте, не існує або була
                   переміщена.

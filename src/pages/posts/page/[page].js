@@ -40,7 +40,8 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const siteMetadata = await getSiteMetadata();
 
-  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle || 'TOTALBF';
+  const pageName = `Сторінка ${pagination.currentPage}`;
 
   return {
     props: {
@@ -49,7 +50,7 @@ export async function getStaticProps({ params = {} } = {}) {
         ...pagination,
         basePath: '/posts',
       },
-      customPageTitle: `${siteName} | Сторінка ${pagination.currentPage}`,
+      customPageTitle: `${siteName} | ${pageName}`,
     },
   };
 }

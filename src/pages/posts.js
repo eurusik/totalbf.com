@@ -31,13 +31,13 @@ export async function getStaticProps() {
 
   const siteMetadata = await getSiteMetadata();
 
-  const siteName = siteMetadata?.title || siteMetadata?.siteTitle;
-  const pageTitle = 'Всі пости';
+  const siteName = siteMetadata?.title || siteMetadata?.siteTitle || 'TOTALBF';
+  const pageName = 'Всі пости';
 
   return {
     props: {
       posts,
-      customPageTitle: `${siteName} | ${pageTitle}`,
+      customPageTitle: `${siteName} | ${pageName}`,
     },
   };
 }
